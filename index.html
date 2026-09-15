@@ -190,23 +190,22 @@
                 </div>
                 <button class="dots">•••</button>
               </div>
-              <div class="ring">
+              <div class="ring" id="missionRing">
                 <div>
-                  <strong>0%</strong>
+                  <strong id="missionPercent">0%</strong>
                   <small>complete</small>
                 </div>
               </div>
               <h4>50 kg waste diverted</h4>
-              <p class="muted">Tinggal <b>50 kg</b> lagi untuk mencapai target.</p>
+              <p class="muted">Tinggal <b id="missionRemaining">50 kg</b> lagi untuk mencapai target.</p>
               <div class="goal-row">
-                <span>0 / 50 kg</span>
+                <span id="missionProgressText">0 / 50 kg</span>
                 <b>30 hari lagi</b>
               </div>
-              <div class="progress"><i style="width:0%"></i></div>
+              <div class="progress"><i id="missionBar" style="width:0%"></i></div>
               <button class="btn ghost full" data-page="challenge">Lihat challenge →</button>
             </div>
           </div>
-
           <div class="dashboard-grid lower">
             <div class="panel">
               <div class="panel-head">
