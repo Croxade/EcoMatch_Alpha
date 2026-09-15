@@ -1,10 +1,10 @@
 import { $, $$, toast } from './js/utils/helpers.js';
-import { state, learn } from './js/models/db.js';
+import { state, learn, products } from './js/models/db.js';
 import { initSettings } from './js/models/settingsDB.js';
 import { loadTheme, toggleTheme } from './js/services/themeLogic.js';
 import { addCoins } from './js/services/coinLogic.js';
 import { downloadReport } from './js/services/impactCalc.js';
-import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, renderConversations, sync } from './js/controllers/uiCtrl.js';
+import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, renderConversations, sync, updateDashboardStats } from './js/controllers/uiCtrl.js';
 import { renderMarket, openProduct } from './js/controllers/marketCtrl.js';
 import { initSellForm, estimate } from './js/controllers/sellCtrl.js';
 
@@ -14,7 +14,7 @@ document.addEventListener("click", (e) => {
   if (p) {
     e.preventDefault();
     page(p.dataset.page);
-    if (window.innerWidth <= 768) $("#sidebar").classList.remove("open");
+    if (window.innerWidth <= 768 && $("#sidebar")) $("#sidebar").classList.remove("open");
     return;
   }
 
@@ -51,59 +51,74 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// GLOBAL UI LISTENERS
-$("#globalSearch").addEventListener("keydown", (e) => {
+// FUNGSI HELPER: Cek elemen dulu sebelum pasang event biar gak crash
+const listen = (id, event, callback) => {
+  const el = $(id);
+  if (el) el.addEventListener(event, callback);
+};
+
+// GLOBAL UI LISTENERS (Safe mode)
+listen("#globalSearch", "keydown", (e) => {
   if (e.key === "Enter") {
     state.query = e.target.value.trim().toLowerCase();
     page("market");
-    $("#marketSearch").value = e.target.value;
+    if ($("#marketSearch")) $("#marketSearch").value = e.target.value;
   }
 });
-$("#globalSearch").addEventListener("input", (e) => {
-  if ($("#market").classList.contains("active")) {
+
+listen("#globalSearch", "input", (e) => {
+  if ($("#market")?.classList.contains("active")) {
     state.query = e.target.value.toLowerCase();
     renderMarket();
   }
 });
-$("#marketSearch").addEventListener("input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
-$("#marketSort").addEventListener("change", (e) => { state.sort = e.target.value; renderMarket(); });
-$("#distanceRange").addEventListener("input", (e) => { $("#distanceVal").textContent = e.target.value + " km"; });
-$("#resetFilters").onclick = () => {
-  state.filter = "all"; state.query = "";
-  $("#marketSearch").value = "";
-  $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all"));
-  renderMarket();
-  toast("Filter direset.");
-};
 
-$("#notifBtn").onclick = () => $("#notifModal").classList.add("open");
-$("#helpBtn").onclick = () => toast("Support EcoMatch tersedia 08.00–22.00.");
-$("#mobileMenu").onclick = () => $("#sidebar").classList.toggle("open");
-$("#profileMenu").onclick = () => page("settings");
-$("#themeToggle").onclick = toggleTheme;
-$("#downloadReport").onclick = downloadReport;
+listen("#marketSearch", "input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
+listen("#marketSort", "change", (e) => { state.sort = e.target.value; renderMarket(); });
+listen("#distanceRange", "input", (e) => { if ($("#distanceVal")) $("#distanceVal").textContent = e.target.value + " km"; });
 
-$("#acceptOffer").onclick = () => {
-  toast("Offer diterima. Pickup sedang dijadwalkan.");
-  $("#acceptOffer").textContent = "Accepted ✓";
-  $("#acceptOffer").disabled = true;
-};
+if ($("#resetFilters")) {
+  $("#resetFilters").onclick = () => {
+    state.filter = "all"; state.query = "";
+    if ($("#marketSearch")) $("#marketSearch").value = "";
+    $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all"));
+    renderMarket();
+    toast("Filter direset.");
+  };
+}
 
-$("#chatForm").onsubmit = (e) => {
-  e.preventDefault();
-  const v = $("#chatMessage").value.trim();
-  if (!v) return;
-  $("#chatBody").insertAdjacentHTML("beforeend", `<div class="bubble me">${v}</div>`);
-  $("#chatMessage").value = "";
-  $("#chatBody").scrollTop = $("#chatBody").scrollHeight;
+if ($("#notifBtn")) $("#notifBtn").onclick = () => $("#notifModal")?.classList.add("open");
+if ($("#helpBtn")) $("#helpBtn").onclick = () => toast("Support EcoMatch tersedia 08.00–22.00.");
+if ($("#mobileMenu")) $("#mobileMenu").onclick = () => $("#sidebar")?.classList.toggle("open");
+if ($("#profileMenu")) $("#profileMenu").onclick = () => page("settings");
+if ($("#themeToggle")) $("#themeToggle").onclick = toggleTheme;
+if ($("#downloadReport")) $("#downloadReport").onclick = downloadReport;
 
-  setTimeout(() => {
-    $("#chatBody").insertAdjacentHTML("beforeend", `
-      <div class="bubble other">Got it. Aku cek dulu availability dan update kamu ya.</div>
-    `);
-    $("#chatBody").scrollTop = $("#chatBody").scrollHeight;
-  }, 700);
-};
+if ($("#acceptOffer")) {
+  $("#acceptOffer").onclick = () => {
+    toast("Offer diterima. Pickup sedang dijadwalkan.");
+    $("#acceptOffer").textContent = "Accepted ✓";
+    $("#acceptOffer").disabled = true;
+  };
+}
+
+if ($("#chatForm")) {
+  $("#chatForm").onsubmit = (e) => {
+    e.preventDefault();
+    const msgEl = $("#chatMessage");
+    const v = msgEl.value.trim();
+    if (!v) return;
+    const body = $("#chatBody");
+    body.insertAdjacentHTML("beforeend", `<div class="bubble me">${v}</div>`);
+    msgEl.value = "";
+    body.scrollTop = body.scrollHeight;
+
+    setTimeout(() => {
+      body.insertAdjacentHTML("beforeend", `<div class="bubble other">Got it. Aku cek dulu availability dan update kamu ya.</div>`);
+      body.scrollTop = body.scrollHeight;
+    }, 700);
+  };
+}
 
 $$("[data-redeem]").forEach((b) => {
   b.addEventListener("click", () => {
@@ -117,16 +132,21 @@ $$("[data-redeem]").forEach((b) => {
   });
 });
 
-// INITIALIZE APP
-loadTheme();
-initSettings();
-initSellForm();
+// INITIALIZE APP (Dibungkus try-catch agar kalau ada 1 error, yang lain tetap jalan)
+try {
+  loadTheme();
+  initSettings();
+  initSellForm(); // Sekarang form Jual pasti tereksekusi
 
-render("dashboard");
-renderLearn();
-renderChallenge();
-renderOrders();
-renderConversations();
+  render("dashboard");
+  renderLearn();
+  renderChallenge();
+  renderOrders();
+  renderConversations();
 
-sync();
-estimate();
+  sync();
+  updateDashboardStats();
+  estimate();
+} catch (err) {
+  console.error("Gagal inisiasi app:", err);
+}
