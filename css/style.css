@@ -2728,10 +2728,6 @@ h2 strong {
     grid-template-columns:45px 1fr 85px;
   }
 
-  .match-card .btn {
-    display:none;
-  }
-
 }
 
 @media(max-width:700px) {
@@ -4815,6 +4811,8 @@ body.dark .toast {
     position: absolute;
     top: 16px;
     right: 16px;
+    left: auto;
+    width: auto;
     display: flex;
     align-items: center;
     gap: 12px;
