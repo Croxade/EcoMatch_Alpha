@@ -1,35 +1,23 @@
 import { $, $$, toast, rupiah } from './js/utils/helpers.js';
-import { state, learn, conversations } from './js/models/db.js';
+import { state, learn, conversations, savedProducts, activeChatSeller, setActiveChat } from './js/models/db.js';
 import { initSettings } from './js/models/settingsDB.js';
 import { loadTheme, toggleTheme } from './js/services/themeLogic.js';
 import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, renderConversations, sync, updateDashboardStats, addCoins } from './js/controllers/uiCtrl.js';
 import { renderMarket, openProduct } from './js/controllers/marketCtrl.js';
 import { initSellForm, estimate } from './js/controllers/sellCtrl.js';
 
-const safeListen = (id, event, callback) => {
-  const el = $(id);
-  if (el) el.addEventListener(event, callback);
-};
+const safeListen = (id, event, callback) => { const el = $(id); if (el) el.addEventListener(event, callback); };
 
 document.addEventListener("click", (e) => {
-  // 1. Logika untuk menutup sidebar di mobile saat tap di area luar
   const sidebar = $("#sidebar");
   const mobileMenu = $("#mobileMenu");
   
   if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains("open")) {
-    if (!sidebar.contains(e.target) && (!mobileMenu || !mobileMenu.contains(e.target))) {
-      sidebar.classList.remove("open");
-    }
+    if (!sidebar.contains(e.target) && (!mobileMenu || !mobileMenu.contains(e.target))) sidebar.classList.remove("open");
   }
 
-  // 2. Navigasi Pindah Halaman
   const p = e.target.closest("[data-page]");
-  if (p) {
-    e.preventDefault();
-    page(p.dataset.page);
-    if (window.innerWidth <= 768 && sidebar) sidebar.classList.remove("open");
-    return;
-  }
+  if (p) { e.preventDefault(); page(p.dataset.page); if (window.innerWidth <= 768 && sidebar) sidebar.classList.remove("open"); return; }
 
   const prod = e.target.closest("[data-product]");
   if (prod) { openProduct(prod.dataset.product); return; }
@@ -45,15 +33,21 @@ document.addEventListener("click", (e) => {
   }
 
   const save = e.target.closest("[data-save]");
-  if (save) { save.textContent = "♥"; toast("Listing disimpan."); return; }
+  if (save) { 
+    const id = Number(save.dataset.save);
+    if (!savedProducts.includes(id)) {
+      savedProducts.push(id);
+      save.style.color = "red"; save.textContent = "♥";
+      toast("Listing disimpan ♡");
+    }
+    return; 
+  }
 
   const learnBtn = e.target.closest("[data-learn]");
   if (learnBtn) {
     const x = learn[Number(learnBtn.dataset.learn)];
     addCoins(Number(x[3].replace(/\D/g, "")), "EcoLearn · " + x[0]);
-    learnBtn.textContent = "Completed ✓";
-    learnBtn.disabled = true;
-    return;
+    learnBtn.textContent = "Completed ✓"; learnBtn.disabled = true; return;
   }
 
   const contact = e.target.closest("[data-contact]");
@@ -62,12 +56,11 @@ document.addEventListener("click", (e) => {
     const isExist = conversations.find(c => c.seller === buyerName);
     if (!isExist) {
       conversations.unshift({
-        logo: buyerName.substring(0, 2).toUpperCase(),
-        seller: buyerName,
-        lastMsg: `Menghubungi buyer dari Smart Match`,
-        time: "Just now"
+        logo: buyerName.substring(0, 2).toUpperCase(), seller: buyerName, lastMsg: `Menghubungi buyer dari Smart Match`, time: "Just now",
+        messages: [{ sender: "me", text: "Halo, saya melihat Anda mencari material ini di Smart Match." }]
       });
     }
+    setActiveChat(buyerName);
     page("messages");
     renderConversations();
     updateDashboardStats();
@@ -76,95 +69,59 @@ document.addEventListener("click", (e) => {
   }
 });
 
-safeListen("#globalSearch", "keydown", (e) => {
-  if (e.key === "Enter") {
-    state.query = e.target.value.trim().toLowerCase();
-    page("market");
-    if ($("#marketSearch")) $("#marketSearch").value = e.target.value;
-  }
-});
-
-safeListen("#globalSearch", "input", (e) => {
-  if ($("#market")?.classList.contains("active")) {
-    state.query = e.target.value.toLowerCase();
-    renderMarket();
-  }
-});
-
+safeListen("#globalSearch", "keydown", (e) => { if (e.key === "Enter") { state.query = e.target.value.trim().toLowerCase(); page("market"); if ($("#marketSearch")) $("#marketSearch").value = e.target.value; } });
+safeListen("#globalSearch", "input", (e) => { if ($("#market")?.classList.contains("active")) { state.query = e.target.value.toLowerCase(); renderMarket(); } });
 safeListen("#marketSearch", "input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
 safeListen("#marketSort", "change", (e) => { state.sort = e.target.value; renderMarket(); });
-
-safeListen("#resetFilters", "click", () => {
-  state.filter = "all"; state.query = "";
-  if ($("#marketSearch")) $("#marketSearch").value = "";
-  $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all"));
-  renderMarket();
-  toast("Filter direset.");
-});
-
+safeListen("#resetFilters", "click", () => { state.filter = "all"; state.query = ""; if ($("#marketSearch")) $("#marketSearch").value = ""; $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all")); renderMarket(); toast("Filter direset."); });
 safeListen("#notifBtn", "click", () => $("#notifModal")?.classList.add("open"));
 safeListen("#helpBtn", "click", () => toast("Support EcoMatch tersedia 08.00–22.00."));
 safeListen("#mobileMenu", "click", () => $("#sidebar")?.classList.toggle("open"));
 safeListen("#profileMenu", "click", () => page("settings"));
 safeListen("#themeToggle", "click", toggleTheme);
 
-// Impact Report Sinkron Dengan Data
 safeListen("#downloadReport", "click", () => {
   const blob = new Blob([`ECOMATCH IMPACT REPORT\n\nWaste diverted: ${state.diverted.toFixed(1)} kg\nCO2 avoided: ${state.co2.toFixed(1)} kg\nValue generated: Rp ${state.value.toLocaleString("id-ID")}\nWater saved: ${state.water.toLocaleString("id-ID")} L\n\nGenerated by EcoMatch prototype.`], { type: "text/plain" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "EcoMatch-Impact-Report.txt";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  toast("Impact report dibuat.");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "EcoMatch-Impact-Report.txt"; a.click(); URL.revokeObjectURL(a.href); toast("Impact report dibuat.");
 });
 
+// LOGIKA SUBMIT CHAT YANG BENAR (Sekarang jalan di Laptop karena type="submit")
 safeListen("#chatForm", "submit", (e) => {
   e.preventDefault();
   const msgEl = $("#chatMessage");
   const v = msgEl ? msgEl.value.trim() : "";
   if (!v) return;
-  const body = $("#chatBody");
-  if (body) {
-    body.insertAdjacentHTML("beforeend", `<div class="bubble me">${v}</div>`);
-    body.scrollTop = body.scrollHeight;
+
+  const activeConv = conversations.find(c => c.seller === activeChatSeller);
+  if (activeConv) {
+    activeConv.messages.push({ sender: "me", text: v });
+    activeConv.lastMsg = v;
+    renderConversations(); // Re-render chat ke layar
   }
+  
   if (msgEl) msgEl.value = "";
 
   setTimeout(() => {
-    if (body) {
-      body.insertAdjacentHTML("beforeend", `<div class="bubble other">Baik, aku cek ketersediaan tim logistik kami dulu ya.</div>`);
-      body.scrollTop = body.scrollHeight;
+    if (activeConv) {
+      activeConv.messages.push({ sender: "other", text: "Baik, pesan diterima. Segera kami update." });
+      activeConv.lastMsg = "Baik, pesan diterima. Segera kami update.";
+      renderConversations();
     }
-  }, 700);
+  }, 1000);
 });
 
 $$("[data-redeem]").forEach((b) => {
   b.addEventListener("click", () => {
     const n = Number(b.dataset.redeem);
     if (state.coins < n) { toast("EcoCoin belum cukup."); return; }
-    state.coins -= n;
-    state.redeemedCoins += n; // Ini yang bikin sinkron sama "Redeemed 0 EC"
+    state.coins -= n; state.redeemedCoins += n; 
     state.history.unshift(["Redeemed EcoCoin", "-" + n + " EC", "Just now"]);
-    sync();
-    render("wallet");
-    toast("Redemption berhasil diproses.");
+    sync(); render("wallet"); toast("Redemption berhasil diproses.");
   });
 });
 
 try {
-  loadTheme();
-  initSettings();
-  initSellForm();
-  
-  render("dashboard");
-  renderLearn();
-  renderChallenge();
-  renderOrders();
-  renderConversations();
-
-  sync();
-  estimate();
-} catch (err) {
-  console.error("Gagal inisiasi App:", err);
-}
+  loadTheme(); initSettings(); initSellForm();
+  render("dashboard"); renderLearn(); renderChallenge(); renderOrders(); renderConversations();
+  sync(); estimate();
+} catch (err) { console.error("Gagal inisiasi App:", err); }
