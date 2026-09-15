@@ -1,5 +1,5 @@
 import { $, $$, toast } from './js/utils/helpers.js';
-import { state, learn, products } from './js/models/db.js';
+import { state, learn } from './js/models/db.js';
 import { initSettings } from './js/models/settingsDB.js';
 import { loadTheme, toggleTheme } from './js/services/themeLogic.js';
 import { addCoins } from './js/services/coinLogic.js';
@@ -8,13 +8,20 @@ import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, 
 import { renderMarket, openProduct } from './js/controllers/marketCtrl.js';
 import { initSellForm, estimate } from './js/controllers/sellCtrl.js';
 
-// GLOBAL EVENT DELEGATION
+// FUNGSI PENGAMAN: Cek elemen dulu sebelum dipasang event (Anti-Crash)
+const safeListen = (id, event, callback) => {
+  const el = $(id);
+  if (el) el.addEventListener(event, callback);
+};
+
+// DELEGASI EVENT UMUM (Anti-Crash)
 document.addEventListener("click", (e) => {
   const p = e.target.closest("[data-page]");
   if (p) {
     e.preventDefault();
     page(p.dataset.page);
-    if (window.innerWidth <= 768 && $("#sidebar")) $("#sidebar").classList.remove("open");
+    const sidebar = $("#sidebar");
+    if (window.innerWidth <= 768 && sidebar) sidebar.classList.remove("open");
     return;
   }
 
@@ -51,14 +58,8 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// FUNGSI HELPER: Cek elemen dulu sebelum pasang event biar gak crash
-const listen = (id, event, callback) => {
-  const el = $(id);
-  if (el) el.addEventListener(event, callback);
-};
-
-// GLOBAL UI LISTENERS (Safe mode)
-listen("#globalSearch", "keydown", (e) => {
+// LISTENER KHUSUS (Dibungkus pakai safeListen)
+safeListen("#globalSearch", "keydown", (e) => {
   if (e.key === "Enter") {
     state.query = e.target.value.trim().toLowerCase();
     page("market");
@@ -66,59 +67,57 @@ listen("#globalSearch", "keydown", (e) => {
   }
 });
 
-listen("#globalSearch", "input", (e) => {
+safeListen("#globalSearch", "input", (e) => {
   if ($("#market")?.classList.contains("active")) {
     state.query = e.target.value.toLowerCase();
     renderMarket();
   }
 });
 
-listen("#marketSearch", "input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
-listen("#marketSort", "change", (e) => { state.sort = e.target.value; renderMarket(); });
-listen("#distanceRange", "input", (e) => { if ($("#distanceVal")) $("#distanceVal").textContent = e.target.value + " km"; });
+safeListen("#marketSearch", "input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
+safeListen("#marketSort", "change", (e) => { state.sort = e.target.value; renderMarket(); });
+safeListen("#distanceRange", "input", (e) => { if ($("#distanceVal")) $("#distanceVal").textContent = e.target.value + " km"; });
 
-if ($("#resetFilters")) {
-  $("#resetFilters").onclick = () => {
-    state.filter = "all"; state.query = "";
-    if ($("#marketSearch")) $("#marketSearch").value = "";
-    $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all"));
-    renderMarket();
-    toast("Filter direset.");
-  };
-}
+safeListen("#resetFilters", "click", () => {
+  state.filter = "all"; state.query = "";
+  if ($("#marketSearch")) $("#marketSearch").value = "";
+  $$(".filter").forEach((x) => x.classList.toggle("active", x.dataset.filter === "all"));
+  renderMarket();
+  toast("Filter direset.");
+});
 
-if ($("#notifBtn")) $("#notifBtn").onclick = () => $("#notifModal")?.classList.add("open");
-if ($("#helpBtn")) $("#helpBtn").onclick = () => toast("Support EcoMatch tersedia 08.00–22.00.");
-if ($("#mobileMenu")) $("#mobileMenu").onclick = () => $("#sidebar")?.classList.toggle("open");
-if ($("#profileMenu")) $("#profileMenu").onclick = () => page("settings");
-if ($("#themeToggle")) $("#themeToggle").onclick = toggleTheme;
-if ($("#downloadReport")) $("#downloadReport").onclick = downloadReport;
+safeListen("#notifBtn", "click", () => $("#notifModal")?.classList.add("open"));
+safeListen("#helpBtn", "click", () => toast("Support EcoMatch tersedia 08.00–22.00."));
+safeListen("#mobileMenu", "click", () => $("#sidebar")?.classList.toggle("open"));
+safeListen("#profileMenu", "click", () => page("settings"));
+safeListen("#themeToggle", "click", toggleTheme);
+safeListen("#downloadReport", "click", downloadReport);
 
-if ($("#acceptOffer")) {
-  $("#acceptOffer").onclick = () => {
-    toast("Offer diterima. Pickup sedang dijadwalkan.");
-    $("#acceptOffer").textContent = "Accepted ✓";
-    $("#acceptOffer").disabled = true;
-  };
-}
+safeListen("#acceptOffer", "click", () => {
+  toast("Offer diterima. Pickup sedang dijadwalkan.");
+  const btn = $("#acceptOffer");
+  if (btn) { btn.textContent = "Accepted ✓"; btn.disabled = true; }
+});
 
-if ($("#chatForm")) {
-  $("#chatForm").onsubmit = (e) => {
-    e.preventDefault();
-    const msgEl = $("#chatMessage");
-    const v = msgEl.value.trim();
-    if (!v) return;
-    const body = $("#chatBody");
+safeListen("#chatForm", "submit", (e) => {
+  e.preventDefault();
+  const msgEl = $("#chatMessage");
+  const v = msgEl ? msgEl.value.trim() : "";
+  if (!v) return;
+  const body = $("#chatBody");
+  if (body) {
     body.insertAdjacentHTML("beforeend", `<div class="bubble me">${v}</div>`);
-    msgEl.value = "";
     body.scrollTop = body.scrollHeight;
+  }
+  if (msgEl) msgEl.value = "";
 
-    setTimeout(() => {
+  setTimeout(() => {
+    if (body) {
       body.insertAdjacentHTML("beforeend", `<div class="bubble other">Got it. Aku cek dulu availability dan update kamu ya.</div>`);
       body.scrollTop = body.scrollHeight;
-    }, 700);
-  };
-}
+    }
+  }, 700);
+});
 
 $$("[data-redeem]").forEach((b) => {
   b.addEventListener("click", () => {
@@ -132,12 +131,12 @@ $$("[data-redeem]").forEach((b) => {
   });
 });
 
-// INITIALIZE APP (Dibungkus try-catch agar kalau ada 1 error, yang lain tetap jalan)
+// INISIASI APP UTAMA
 try {
   loadTheme();
   initSettings();
-  initSellForm(); // Sekarang form Jual pasti tereksekusi
-
+  initSellForm(); // Sekarang form pasti nyala!
+  
   render("dashboard");
   renderLearn();
   renderChallenge();
@@ -145,8 +144,8 @@ try {
   renderConversations();
 
   sync();
-  updateDashboardStats();
+  if (typeof updateDashboardStats === "function") updateDashboardStats();
   estimate();
 } catch (err) {
-  console.error("Gagal inisiasi app:", err);
+  console.error("Gagal inisiasi App:", err);
 }

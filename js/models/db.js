@@ -9,8 +9,13 @@ export const IMG = {
   textile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5mB1oW7DwpQSeABJPzZsigivaV8hpVD9hvPnJ_SOsIz6jg6sVv9lfL8pd&s=10"
 };
 
-export let products = [];
-export let matches = []; // Smart match awal kosong, nanti bakal muncul kalau ada listing
+// 2 dummy data biar marketplace nggak kosong banget pas pertama buka
+export let products = [
+  { id: 1, cat: "Plastik", name: "Botol PET Bening", img: IMG.plastic, price: 2750, weight: "10 kg", loc: "Jakarta Selatan", seller: "GreenSaver", match: 92, condition: "Clean & sorted" },
+  { id: 2, cat: "Kertas", name: "Kardus Corrugated", img: IMG.cardboard, price: 1800, weight: "35 kg", loc: "Jakarta Selatan", seller: "Dina Home", match: 88, condition: "Dry & sorted" }
+];
+
+export let matches = []; // Match awal kosong
 
 export let learn = [
   ["Mitos atau Fakta: Plastik Bisa Terurai?", IMG.eco, "2 min", "+50 EC"],
@@ -19,11 +24,12 @@ export let learn = [
   ["Cara Memilah Sampah di Rumah", IMG.eco, "2 min", "+30 EC"]
 ];
 
+// Progress asli lu tetep mulai dari nol
 export let state = {
   coins: 0,
-  diverted: 0, // kg
-  value: 0,    // Rupiah
-  co2: 0,      // kg
+  diverted: 0,
+  value: 0,
+  co2: 0,
   filter: "all",
   query: "",
   sort: "match",
