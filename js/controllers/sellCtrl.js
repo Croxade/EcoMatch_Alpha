@@ -11,22 +11,15 @@ export function estimate() {
   const kg = Number(wInput ? wInput.value : 0);
   const price = Number(pInput ? pInput.value : 0);
 
-  const estimateEl = $("#estimate");
-  if (estimateEl) estimateEl.textContent = rupiah(kg * price);
-
-  const prevName = $("#previewName");
+  if ($("#estimate")) $("#estimate").textContent = rupiah(kg * price);
+  
   const nameInput = $("#sellName");
-  if (prevName) prevName.textContent = (nameInput && nameInput.value) ? nameInput.value : "Material baru";
-
-  const prevPrice = $("#previewPrice");
-  if (prevPrice) prevPrice.innerHTML = rupiah(price) + " <small>/ kg</small>";
-
-  const prevDesc = $("#previewDesc");
+  if ($("#previewName")) $("#previewName").textContent = (nameInput && nameInput.value) ? nameInput.value : "Material baru";
+  if ($("#previewPrice")) $("#previewPrice").innerHTML = rupiah(price) + " <small>/ kg</small>";
+  
   const condInput = $("#sellCondition");
-  if (prevDesc) prevDesc.textContent = condInput ? condInput.value : "";
-
-  const prevCat = $("#previewCat");
-  if (prevCat) prevCat.textContent = selectedCat.toUpperCase();
+  if ($("#previewDesc")) $("#previewDesc").textContent = condInput ? condInput.value : "";
+  if ($("#previewCat")) $("#previewCat").textContent = selectedCat.toUpperCase();
 }
 
 export function initSellForm() {

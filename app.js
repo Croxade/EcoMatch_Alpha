@@ -8,13 +8,11 @@ import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, 
 import { renderMarket, openProduct } from './js/controllers/marketCtrl.js';
 import { initSellForm, estimate } from './js/controllers/sellCtrl.js';
 
-// FUNGSI PENGAMAN: Cek elemen dulu sebelum dipasang event (Anti-Crash)
 const safeListen = (id, event, callback) => {
   const el = $(id);
   if (el) el.addEventListener(event, callback);
 };
 
-// DELEGASI EVENT UMUM (Anti-Crash)
 document.addEventListener("click", (e) => {
   const p = e.target.closest("[data-page]");
   if (p) {
@@ -49,16 +47,8 @@ document.addEventListener("click", (e) => {
     learnBtn.disabled = true;
     return;
   }
-
-  const contact = e.target.closest("[data-contact]");
-  if (contact) {
-    page("messages");
-    toast("Chat dibuka dengan " + contact.dataset.contact);
-    return;
-  }
 });
 
-// LISTENER KHUSUS (Dibungkus pakai safeListen)
 safeListen("#globalSearch", "keydown", (e) => {
   if (e.key === "Enter") {
     state.query = e.target.value.trim().toLowerCase();
@@ -76,7 +66,6 @@ safeListen("#globalSearch", "input", (e) => {
 
 safeListen("#marketSearch", "input", (e) => { state.query = e.target.value.toLowerCase(); renderMarket(); });
 safeListen("#marketSort", "change", (e) => { state.sort = e.target.value; renderMarket(); });
-safeListen("#distanceRange", "input", (e) => { if ($("#distanceVal")) $("#distanceVal").textContent = e.target.value + " km"; });
 
 safeListen("#resetFilters", "click", () => {
   state.filter = "all"; state.query = "";
@@ -92,12 +81,6 @@ safeListen("#mobileMenu", "click", () => $("#sidebar")?.classList.toggle("open")
 safeListen("#profileMenu", "click", () => page("settings"));
 safeListen("#themeToggle", "click", toggleTheme);
 safeListen("#downloadReport", "click", downloadReport);
-
-safeListen("#acceptOffer", "click", () => {
-  toast("Offer diterima. Pickup sedang dijadwalkan.");
-  const btn = $("#acceptOffer");
-  if (btn) { btn.textContent = "Accepted ✓"; btn.disabled = true; }
-});
 
 safeListen("#chatForm", "submit", (e) => {
   e.preventDefault();
@@ -131,11 +114,10 @@ $$("[data-redeem]").forEach((b) => {
   });
 });
 
-// INISIASI APP UTAMA
 try {
   loadTheme();
   initSettings();
-  initSellForm(); // Sekarang form pasti nyala!
+  initSellForm();
   
   render("dashboard");
   renderLearn();

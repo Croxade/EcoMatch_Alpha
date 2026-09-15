@@ -11,65 +11,34 @@
     <aside class="sidebar" id="sidebar">
       <div class="brand">
         <img src="assets/logo.png" alt="EcoMatch">
-        <span>
-          ECOMATCH
-          <small>BETA PLATFORM</small>
-        </span>
+        <span>ECOMATCH<small>BETA PLATFORM</small></span>
       </div>
       <div class="profile-mini">
         <div class="avatar">GS</div>
-        <div>
-          <b>GreenSaver</b>
-          <small>Level 8 · Eco Warrior</small>
-        </div>
+        <div><b>GreenSaver</b><small>Level 8 · Eco Warrior</small></div>
         <button id="profileMenu">•••</button>
       </div>
       <nav>
-        <button class="nav active" data-page="dashboard">
-          <i>⌂</i> Overview
-        </button>
-        <button class="nav" data-page="market">
-          <i>▦</i> Marketplace <em id="navMarketBadge">0</em>
-        </button>
-        <button class="nav" data-page="matches">
-          <i>⌁</i> Smart Match <em class="new">AI</em>
-        </button>
-        <button class="nav" data-page="sell">
-          <i>＋</i> Jual / Donasikan
-        </button>
-        <button class="nav" data-page="orders">
-          <i>▤</i> Pesanan & Pickup
-        </button>
-        <button class="nav" data-page="messages">
-          <i>◌</i> Messages <em id="msgBadge">0</em>
-        </button>
+        <button class="nav active" data-page="dashboard"><i>⌂</i> Overview</button>
+        <button class="nav" data-page="market"><i>▦</i> Marketplace <em id="navMarketBadge">0</em></button>
+        <button class="nav" data-page="matches"><i>⌁</i> Smart Match <em class="new">AI</em></button>
+        <button class="nav" data-page="sell"><i>＋</i> Jual / Donasikan</button>
+        <button class="nav" data-page="orders"><i>▤</i> Pesanan & Pickup</button>
+        <button class="nav" data-page="messages"><i>◌</i> Messages <em id="msgBadge">0</em></button>
         <div class="nav-label">ENGAGEMENT</div>
-        <button class="nav" data-page="learn">
-          <i>▧</i> EcoLearn
-        </button>
-        <button class="nav" data-page="challenge">
-          <i>♧</i> Challenges
-        </button>
-        <button class="nav" data-page="impact">
-          <i>◒</i> Impact Report
-        </button>
+        <button class="nav" data-page="learn"><i>▧</i> EcoLearn</button>
+        <button class="nav" data-page="challenge"><i>♧</i> Challenges</button>
+        <button class="nav" data-page="impact"><i>◒</i> Impact Report</button>
         <div class="nav-label">ACCOUNT</div>
-        <button class="nav" data-page="wallet">
-          <i>◉</i> EcoWallet
-        </button>
-        <button class="nav" data-page="settings">
-          <i>⚙</i> Settings
-        </button>
+        <button class="nav" data-page="wallet"><i>◉</i> EcoWallet</button>
+        <button class="nav" data-page="settings"><i>⚙</i> Settings</button>
       </nav>
       <div class="sidebar-bottom">
         <div class="coin-mini">
-          <span>EcoCoin</span>
-          <strong id="sideCoins">0</strong>
+          <span>EcoCoin</span><strong id="sideCoins">0</strong>
           <button data-page="wallet">↗</button>
         </div>
-        <button class="help-btn" id="helpBtn">
-          ? <span>Butuh bantuan?</span>
-        </button>
+        <button class="help-btn" id="helpBtn">? <span>Butuh bantuan?</span></button>
       </div>
     </aside>
 
@@ -87,16 +56,9 @@
             <input id="globalSearch" placeholder="Cari barang, material, perusahaan...">
             <kbd>⌘ K</kbd>
           </div>
-          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-            <span id="themeIcon">☾</span>
-          </button>
-          <button class="icon-btn" id="notifBtn">
-            ♢ <b>0</b>
-          </button>
-          <button class="user-btn">
-            <div class="avatar sm">GS</div>
-            <span>GreenSaver</span> ⌄
-          </button>
+          <button class="theme-toggle" id="themeToggle" title="Toggle dark mode"><span id="themeIcon">☾</span></button>
+          <button class="icon-btn" id="notifBtn">♢ <b>0</b></button>
+          <button class="user-btn"><div class="avatar sm">GS</div><span>GreenSaver</span> ⌄</button>
         </div>
       </header>
 
@@ -117,14 +79,8 @@
               <div class="orbit o1"></div>
               <div class="orbit o2"></div>
               <div class="leaf-card">♻<span>Circular<br>Economy</span></div>
-              <div class="float-card fc1">
-                <b>+ Rp 0</b>
-                <small>nilai waste bulan ini</small>
-              </div>
-              <div class="float-card fc2">
-                <b>0 kg</b>
-                <small>dialihkan dari landfill</small>
-              </div>
+              <div class="float-card fc1"><b>+ Rp 0</b><small>nilai waste bulan ini</small></div>
+              <div class="float-card fc2"><b>0 kg</b><small>dialihkan dari landfill</small></div>
             </div>
           </div>
 
@@ -162,67 +118,45 @@
           <div class="dashboard-grid">
             <div class="panel chart-panel">
               <div class="panel-head">
-                <div>
-                  <h3>Waste & Value Overview</h3>
-                  <p>Performance 30 hari terakhir</p>
-                </div>
+                <div><h3>Waste & Value Overview</h3><p>Performance 30 hari terakhir</p></div>
                 <select><option>30 hari</option></select>
               </div>
-              <div class="legend">
-                <span><i></i> Waste diverted</span>
-                <span><i></i> Value generated</span>
-              </div>
+              <div class="legend"><span><i></i> Waste diverted</span><span><i></i> Value generated</span></div>
               <div class="chart">
                 <svg viewBox="0 0 700 220" preserveAspectRatio="none">
                   <path class="area" d="M0,220 L700,220 Z"/>
                   <path class="line" d="M0,220 L700,220"/>
                 </svg>
-                <div class="xlabels">
-                  <span>Jun 15</span><span>Jun 25</span><span>Jul 05</span><span>Jul 14</span>
-                </div>
+                <div class="xlabels"><span>Jun 15</span><span>Jun 25</span><span>Jul 05</span><span>Jul 14</span></div>
               </div>
             </div>
             <div class="panel goal-panel">
               <div class="panel-head">
-                <div>
-                  <h3>Monthly Mission</h3>
-                  <p>July 2026 · Personal target</p>
-                </div>
+                <div><h3>Monthly Mission</h3><p>July 2026 · Personal target</p></div>
                 <button class="dots">•••</button>
               </div>
               <div class="ring" id="missionRing">
-                <div>
-                  <strong id="missionPercent">0%</strong>
-                  <small>complete</small>
-                </div>
+                <div><strong id="missionPercent">0%</strong><small>complete</small></div>
               </div>
               <h4>50 kg waste diverted</h4>
               <p class="muted">Tinggal <b id="missionRemaining">50 kg</b> lagi untuk mencapai target.</p>
-              <div class="goal-row">
-                <span id="missionProgressText">0 / 50 kg</span>
-                <b>30 hari lagi</b>
-              </div>
+              <div class="goal-row"><span id="missionProgressText">0 / 50 kg</span><b>30 hari lagi</b></div>
               <div class="progress"><i id="missionBar" style="width:0%"></i></div>
               <button class="btn ghost full" data-page="challenge">Lihat challenge →</button>
             </div>
           </div>
+
           <div class="dashboard-grid lower">
             <div class="panel">
               <div class="panel-head">
-                <div>
-                  <h3>Smart Match Untukmu</h3>
-                  <p>Bisnis yang mencari material yang kamu punya.</p>
-                </div>
+                <div><h3>Smart Match Untukmu</h3><p>Bisnis yang mencari material yang kamu punya.</p></div>
                 <button class="text-btn" data-page="matches">View all →</button>
               </div>
               <div id="dashMatches"></div>
             </div>
             <div class="panel">
               <div class="panel-head">
-                <div>
-                  <h3>Recent Activity</h3>
-                  <p>Aktivitas akun terbaru.</p>
-                </div>
+                <div><h3>Recent Activity</h3><p>Aktivitas akun terbaru.</p></div>
                 <button class="text-btn" data-page="orders">History →</button>
               </div>
               <div id="dashActivity"></div>
@@ -238,9 +172,9 @@
               <p>Listing dari individu, komunitas, dan bisnis. Beli material, jual waste, atau cari supplier.</p>
             </div>
             <div class="market-kpis">
-              <div><b>0</b><span>active listings</span></div>
-              <div><b>0</b><span>buyers online</span></div>
-              <div><b>0%</b><span>match rate</span></div>
+              <div><b id="kpiListings">2</b><span>active listings</span></div>
+              <div><b>124</b><span>buyers online</span></div>
+              <div><b>94%</b><span>match rate</span></div>
             </div>
           </div>
           <div class="market-tools">
@@ -267,14 +201,13 @@
             <aside class="market-sidebar">
               <b>Refine results</b>
               <label>Type</label>
-              <div class="check"><input type="checkbox" checked> For sale <span>0</span></div>
-              <div class="check"><input type="checkbox"> Donation <span>0</span></div>
+              <div class="check"><input type="checkbox" checked> For sale</div>
+              <div class="check"><input type="checkbox"> Donation</div>
               <button class="reset-filter" id="resetFilters">Reset filters</button>
             </aside>
             <div>
               <div class="results-line">
-                <span><b id="resultCount">0</b> listings near you</span>
-                <span>Showing <b>0</b> of 0</span>
+                <span><b id="resultCount">0</b> listings</span>
               </div>
               <div class="market-grid" id="marketGrid"></div>
             </div>
@@ -287,11 +220,6 @@
               <span class="eyebrow">SMART MATCH ENGINE</span>
               <h2>We found your next opportunity.</h2>
               <p>Match dibuat berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer.</p>
-            </div>
-            <div class="match-score">
-              <span>Your match profile</span>
-              <strong>0%</strong>
-              <small>No listings yet</small>
             </div>
           </div>
           <div id="matchList" class="match-list"></div>
@@ -308,11 +236,7 @@
           </div>
           <div class="sell-layout">
             <div class="sell-main">
-              <div class="stepper">
-                <span class="active">01 <b>Material</b></span><i></i>
-                <span>02 <b>Details</b></span><i></i>
-                <span>03 <b>Pickup</b></span>
-              </div>
+              <!-- Stepper dihapus sesuai request -->
               <form id="sellForm">
                 <div class="form-section">
                   <h3>What are you offering?</h3>
@@ -372,16 +296,10 @@
 
         <section class="page" id="orders">
           <div class="page-top">
-            <div>
-              <span class="eyebrow">TRANSACTIONS</span>
-              <h2>Orders & Pickup</h2>
-              <p>Kelola proses dari deal sampai material diterima buyer.</p>
-            </div>
+            <div><span class="eyebrow">TRANSACTIONS</span><h2>Orders & Pickup</h2></div>
           </div>
           <div class="orders-table">
-            <div class="tr th">
-              <span>ORDER</span><span>PARTNER</span><span>STATUS</span><span>VALUE</span><span>DATE</span><span></span>
-            </div>
+            <div class="tr th"><span>ORDER</span><span>PARTNER</span><span>STATUS</span><span>VALUE</span><span>DATE</span><span></span></div>
             <div id="ordersRows"></div>
           </div>
         </section>
@@ -389,10 +307,7 @@
         <section class="page" id="messages">
           <div class="messages-layout">
             <div class="conversation-list">
-              <div class="conversation-head">
-                <h3>Messages</h3>
-                <button>＋</button>
-              </div>
+              <div class="conversation-head"><h3>Messages</h3><button>＋</button></div>
               <div id="conversationList"></div>
             </div>
             <div class="chat">
@@ -400,10 +315,7 @@
                 <div class="avatar">ER</div>
                 <div><b>EcoRecycle Indonesia</b><small>● Online · Buyer</small></div>
               </div>
-              <div class="chat-body" id="chatBody">
-                <div class="date">Today</div>
-                <div class="bubble other">Halo! Silakan post material kamu untuk mulai terhubung dengan partner kami.</div>
-              </div>
+              <div class="chat-body" id="chatBody"></div>
               <form class="chat-input" id="chatForm">
                 <input id="chatMessage" placeholder="Tulis pesan...">
                 <button>↑</button>
@@ -414,44 +326,22 @@
 
         <section class="page" id="learn">
           <div class="learn-hero">
-            <div>
-              <span class="eyebrow">ECOMATCH LEARN</span>
-              <h2>Scroll. Learn. Earn. Impact.</h2>
-              <p>Konten pendek tentang circular economy. Setiap selesai, kamu mendapat EcoCoin.</p>
-            </div>
-            <div>
-              <strong>0 EC</strong>
-              <small>earned from learning</small>
-            </div>
+            <div><span class="eyebrow">ECOMATCH LEARN</span><h2>Scroll. Learn. Earn.</h2></div>
           </div>
           <div class="learn-grid" id="learnGrid"></div>
         </section>
 
         <section class="page" id="challenge">
           <div class="challenge-banner">
-            <div>
-              <span class="eyebrow">COMMUNITY CHALLENGE</span>
-              <h2>30 Days Circular</h2>
-              <p>Selesaikan misi untuk mendapatkan reward EcoCoin.</p>
-            </div>
+            <div><span class="eyebrow">COMMUNITY CHALLENGE</span><h2>30 Days Circular</h2></div>
           </div>
           <div class="challenge-columns">
             <div class="panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Your missions</h3>
-                  <p>Complete untuk unlock reward.</p>
-                </div>
-              </div>
+              <div class="panel-head"><div><h3>Your missions</h3></div></div>
               <div id="challengeList"></div>
             </div>
             <div class="panel leaderboard">
-              <div class="panel-head">
-                <div>
-                  <h3>Community leaderboard</h3>
-                  <p>Top circular warriors this week.</p>
-                </div>
-              </div>
+              <div class="panel-head"><div><h3>Community leaderboard</h3></div></div>
               <div id="leaderboard"></div>
             </div>
           </div>
@@ -459,11 +349,7 @@
 
         <section class="page" id="impact">
           <div class="impact-header">
-            <div>
-              <span class="eyebrow">YOUR IMPACT</span>
-              <h2>Make your waste visible.</h2>
-              <p>Data sederhana yang menunjukkan kontribusi kamu.</p>
-            </div>
+            <div><span class="eyebrow">YOUR IMPACT</span><h2>Make your waste visible.</h2></div>
             <button class="btn primary" id="downloadReport">↓ Download Impact Report</button>
           </div>
           <div class="impact-kpi">
@@ -477,16 +363,11 @@
         <section class="page" id="wallet">
           <div class="wallet-layout">
             <div class="wallet-card-big">
-              <div class="wallet-top">
-                <span>ECOMATCH ECOWALLET</span>
-              </div>
+              <div class="wallet-top"><span>ECOMATCH ECOWALLET</span></div>
               <small>Available balance</small>
               <strong id="walletCoins">0</strong>
               <div class="wallet-number">EC · 0826 · 1845</div>
-              <div class="wallet-bottom">
-                <span>GreenSaver</span>
-                <span>EcoCoin</span>
-              </div>
+              <div class="wallet-bottom"><span>GreenSaver</span><span>EcoCoin</span></div>
             </div>
             <div class="wallet-side">
               <div><span>Earned</span><b>0 EC</b></div>
@@ -494,23 +375,11 @@
               <button class="btn primary full" data-redeem="500">Redeem EcoCoin →</button>
             </div>
           </div>
-          <div class="wallet-content">
-            <div class="panel">
-              <div class="panel-head">
-                <div><h3>How you earned</h3></div>
-              </div>
-              <div id="walletActivity"></div>
-            </div>
-          </div>
         </section>
 
         <section class="page" id="settings">
           <div class="page-top">
-            <div>
-              <span class="eyebrow">ACCOUNT</span>
-              <h2>Settings</h2>
-              <p>Atur pengalaman EcoMatch sesuai kebutuhanmu.</p>
-            </div>
+            <div><span class="eyebrow">ACCOUNT</span><h2>Settings</h2></div>
             <div class="settings-actions">
               <span id="settingsSaved" class="save-state">All changes saved</span>
               <button class="btn ghost" id="resetSettings">Reset</button>
@@ -530,6 +399,42 @@
                 <div class="form-grid">
                   <label>Display name <input id="setName" value="GreenSaver"></label>
                   <label>City <input id="setCity" value="Jakarta Selatan"></label>
+                </div>
+              </div>
+              <div class="settings-pane" data-settings-pane="notifications">
+                <h3>Notification center</h3>
+                <p>Pilih update yang penting buat kamu.</p>
+                <div class="setting-option">
+                  <div><b>Smart Match alerts</b><small>Notifikasi saat ada buyer yang cocok.</small></div>
+                  <label class="switch"><input type="checkbox" checked><span></span></label>
+                </div>
+                <div class="setting-option">
+                  <div><b>Order & pickup updates</b><small>Status penjemputan barang.</small></div>
+                  <label class="switch"><input type="checkbox" checked><span></span></label>
+                </div>
+              </div>
+              <div class="settings-pane" data-settings-pane="privacy">
+                <h3>Privacy & visibility</h3>
+                <p>Kontrol privasi akun EcoMatch kamu.</p>
+                <div class="setting-option">
+                  <div><b>Public profile</b><small>Tampilkan nama di leaderboard.</small></div>
+                  <label class="switch"><input type="checkbox" checked><span></span></label>
+                </div>
+                <div class="setting-option">
+                  <div><b>Approximate location</b><small>Hanya tampilkan kota, bukan alamat lengkap.</small></div>
+                  <label class="switch"><input type="checkbox" checked><span></span></label>
+                </div>
+              </div>
+              <div class="settings-pane" data-settings-pane="pickup">
+                <h3>Pickup preferences</h3>
+                <p>Atur logistik penjemputan barang.</p>
+                <div class="form-grid">
+                  <label>Metode default
+                    <select><option>EcoMatch Pickup</option><option>Drop-off</option></select>
+                  </label>
+                  <label>Hari preferensi
+                    <select><option>Weekdays</option><option>Weekend</option></select>
+                  </label>
                 </div>
               </div>
             </div>
