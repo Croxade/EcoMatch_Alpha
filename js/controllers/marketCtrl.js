@@ -120,10 +120,7 @@ export function openProduct(id) {
         seller: p.seller,
         lastMsg: `Tanya material: ${p.name}`,
         time: "Just now",
-        messages: [
-          { from: "other", text: "Halo! Silakan post pertanyaan tentang material." },
-          { from: "me", text: `Halo kak, untuk material ${p.name} apakah masih tersedia?` }
-        ]
+        messages: [{ from: "other", text: "Halo! Silakan post pertanyaan tentang material." }]
       });
       idx = 0;
     }
@@ -132,6 +129,13 @@ export function openProduct(id) {
     page("messages");
     setActiveConversation(idx);
     updateDashboardStats();
+
+    // Isi draft di kolom chat, biar user yang mutusin kirim atau ubah dulu
+    setTimeout(() => {
+      const chatInput = $("#chatMessage");
+      if (chatInput) chatInput.value = `Halo kak, untuk material ${p.name} apakah masih tersedia?`;
+    }, 100);
+
     toast(`Membuka chat dengan ${p.seller}`);
   };
 }
