@@ -9,13 +9,9 @@ export const IMG = {
   textile: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5mB1oW7DwpQSeABJPzZsigivaV8hpVD9hvPnJ_SOsIz6jg6sVv9lfL8pd&s=10"
 };
 
-// Marketplace mulai dari kosong (0 produk)
 export let products = [];
+export let matches = []; // Smart match awal kosong, nanti bakal muncul kalau ada listing
 
-// Smart match awal kosong, bisa bertambah nanti
-export let matches = [];
-
-// Modul belajar tetap disediakan agar fitur EcoLearn bisa dipakai untuk nambah koin dari 0
 export let learn = [
   ["Mitos atau Fakta: Plastik Bisa Terurai?", IMG.eco, "2 min", "+50 EC"],
   ["Kenapa Kardus Bekas Punya Nilai Tinggi?", IMG.cardboard, "3 min", "+40 EC"],
@@ -23,17 +19,19 @@ export let learn = [
   ["Cara Memilah Sampah di Rumah", IMG.eco, "2 min", "+30 EC"]
 ];
 
-// State awal: Koin 0 dan riwayat kosong
 export let state = {
-  coins: 0, 
-  filter: "all", 
-  query: "", 
+  coins: 0,
+  diverted: 0, // kg
+  value: 0,    // Rupiah
+  co2: 0,      // kg
+  filter: "all",
+  query: "",
   sort: "match",
   history: []
 };
 
 export const meta = {
-  dashboard: ["EcoMatch / Overview", "Good afternoon, GreenSaver.", "Hari ini adalah hari yang bagus untuk mengubah sesuatu yang tidak terpakai menjadi bernilai."],
+  dashboard: ["EcoMatch / Overview", "Good afternoon, GreenSaver.", "Mulai kelola dan ubah waste kamu jadi value hari ini."],
   market: ["EcoMatch / Marketplace", "Find value in what you already have.", "Temukan material, buyer, dan supplier di sekitar ekosistemmu."],
   matches: ["EcoMatch / Smart Match", "We found your next opportunity.", "Match berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer."],
   sell: ["EcoMatch / Sell", "Turn waste into value.", "Post dalam kurang dari 2 menit. EcoMatch akan mencarikan buyer yang relevan."],

@@ -7,6 +7,16 @@ export function sync() {
     const x = $("#" + id);
     if (x) x.textContent = state.coins.toLocaleString("id-ID");
   });
+
+  // Sinkronisasi statistik dasbor dari state 0
+  const statDiv = $("#statDiverted");
+  if (statDiv) statDiv.textContent = state.diverted.toFixed(1) + " kg";
+
+  const statVal = $("#statValue");
+  if (statVal) statVal.textContent = "Rp " + state.value.toLocaleString("id-ID");
+
+  const statCo2 = $("#statCo2");
+  if (statCo2) statCo2.textContent = state.co2.toFixed(1) + " kg";
 }
 
 export function page(name) {
@@ -39,57 +49,51 @@ export function closeModals() {
 }
 
 export function renderDash() {
-  $("#dashMatches").innerHTML = matches.slice(0, 3).map(m => `
-    <div class="match-row">
-      <div class="company-logo">${m[0]}</div>
-      <main><b>${m[1]}</b><small>Needs ${m[2]} · ${m[3]}</small></main>
-      <div class="match-score-mini"><b>${m[5]}</b><small>${m[6]}</small></div>
-    </div>
-  `).join("");
+  sync();
+  const matchContainer = $("#dashMatches");
+  if (matchContainer) {
+    matchContainer.innerHTML = matches.length === 0 
+      ? `<p class="muted" style="padding:16px;font-size:13px">Belum ada Smart Match. Yuk, post waste kamu di menu Jual!</p>` 
+      : matches.slice(0, 3).map(m => `
+        <div class="match-row">
+          <div class="company-logo">${m[0]}</div>
+          <main><b>${m[1]}</b><small>Needs ${m[2]} · ${m[3]}</small></main>
+          <div class="match-score-mini"><b>${m[5]}</b><small>${m[6]}</small></div>
+        </div>
+      `).join("");
+  }
 
-  $("#dashActivity").innerHTML = state.history.slice(0, 4).map(a => `
-    <div class="activity">
-      <span><b>${a[0]}</b><small>${a[2]}</small></span>
-      <strong>${a[1]}</strong>
-    </div>
-  `).join("");
+  const actContainer = $("#dashActivity");
+  if (actContainer) {
+    actContainer.innerHTML = state.history.length === 0
+      ? `<p class="muted" style="padding:16px;font-size:13px">Belum ada aktivitas. Mulai jelajahi EcoLearn atau post waste.</p>`
+      : state.history.slice(0, 4).map(a => `
+        <div class="activity">
+          <span><b>${a[0]}</b><small>${a[2]}</small></span>
+          <strong>${a[1]}</strong>
+        </div>
+      `).join("");
+  }
 }
 
 export function renderOrders() {
-  const rows = [
-    ["#ECM-1842", "EcoRecycle Indonesia", "Waiting pickup", "Rp 27.500", "Tomorrow 09:00", "orange"],
-    ["#ECM-1809", "PaperLoop", "Completed", "Rp 63.000", "Jul 13", ""],
-    ["#ECM-1762", "ReWear Indonesia", "In transit", "Rp 153.000", "Jul 12", "blue"],
-    ["#ECM-1711", "MetalCycle", "Completed", "Rp 352.000", "Jul 09", ""],
-    ["#ECM-1689", "TechCycle", "Completed", "Rp 129.500", "Jul 05", ""],
-    ["#ECM-1624", "PlastCycle", "Waiting pickup", "Rp 83.200", "Jul 03", "orange"]
-  ];
-
-  $("#ordersRows").innerHTML = rows.map(r => `
-    <div class="tr">
-      <span><b>${r[0]}</b><small style="display:block;color:#9aa39e;font-size:6px">Marketplace</small></span>
-      <span>${r[1]}</span>
-      <span><em class="status ${r[5]}">${r[2]}</em></span>
-      <span>${r[3]}</span><span>${r[4]}</span>
-      <button class="text-btn" data-order="${r[0]}">•••</button>
-    </div>
-  `).join("");
+  const rows = []; // Kosong dari 0
+  const ordersRows = $("#ordersRows");
+  if (ordersRows) {
+    ordersRows.innerHTML = rows.length === 0 
+      ? `<p class="muted" style="padding:24px;text-align:center">Belum ada transaksi atau pickup.</p>` 
+      : "";
+  }
 }
 
 export function renderConversations() {
-  const conversations = [
-    ["ER", "EcoRecycle Indonesia", "Ready to discuss pickup.", "2m"],
-    ["PL", "PaperLoop", "Can you confirm the volume?", "18m"],
-    ["RW", "ReWear Indonesia", "Thanks! See you tomorrow.", "1h"],
-    ["MC", "MetalCycle", "Offer updated.", "3h"]
-  ];
-
-  $("#conversationList").innerHTML = conversations.map((c, i) => `
-    <div class="conversation ${i === 0 ? "active" : ""}">
-      <div class="company-logo">${c[0]}</div>
-      <main><b>${c[1]}</b><small>${c[2]}</small></main><time>${c[3]}</time>
-    </div>
-  `).join("");
+  const conversations = []; // Kosong dari 0
+  const convList = $("#conversationList");
+  if (convList) {
+    convList.innerHTML = conversations.length === 0
+      ? `<p class="muted" style="padding:20px;text-align:center;font-size:13px">Belum ada pesan aktif.</p>`
+      : "";
+  }
 }
 
 export function renderLearn() {
@@ -113,11 +117,9 @@ export function renderLearn() {
 
 export function renderChallenge() {
   const a = [
-    ["♻", "Divert 5 kg plastic", "2 / 5 kg", 100, "40%"],
-    ["▧", "Complete 2 EcoLearn", "1 / 2 lessons", 60, "50%"],
-    ["＋", "Publish one listing", "Not started", 150, "0%"],
-    ["⌁", "Make a Smart Match", "Not started", 110, "0%"],
-    ["♡", "Invite a friend", "Not started", 100, "0%"]
+    ["♻", "Divert 5 kg plastic", "0 / 5 kg", 100, "0%"],
+    ["▧", "Complete 2 EcoLearn", "0 / 2 lessons", 60, "0%"],
+    ["＋", "Publish one listing", "Not started", 150, "0%"]
   ];
 
   $("#challengeList").innerHTML = a.map(x => `
@@ -129,8 +131,7 @@ export function renderChallenge() {
   `).join("");
 
   const leaders = [
-    ["1", "AR", "Andi R.", "2.840 EC"], ["2", "MN", "Maya N.", "2.420 EC"], ["3", "GS", "GreenSaver", "2.180 EC"],
-    ["4", "FK", "Fikri K.", "1.940 EC"], ["5", "SA", "Salsa A.", "1.760 EC"]
+    ["1", "GS", "GreenSaver (You)", "0 EC"]
   ];
 
   $("#leaderboard").innerHTML = leaders.map(x => `
@@ -142,12 +143,15 @@ export function renderChallenge() {
 }
 
 export function renderWallet() {
-  $("#walletActivity").innerHTML = state.history.concat([
-    ["Daily streak bonus", "+20 EC", "Jul 11"], ["Referral reward", "+100 EC", "Jul 10"]
-  ]).slice(0, 7).map(a => `
-    <div class="activity">
-      <span><b>${a[0]}</b><small>${a[2]}</small></span>
-      <strong>${a[1]}</strong>
-    </div>
-  `).join("");
+  const walletAct = $("#walletActivity");
+  if (walletAct) {
+    walletAct.innerHTML = state.history.length === 0
+      ? `<p class="muted" style="padding:16px;font-size:13px">Belum ada riwayat EcoCoin.</p>`
+      : state.history.slice(0, 7).map(a => `
+        <div class="activity">
+          <span><b>${a[0]}</b><small>${a[2]}</small></span>
+          <strong>${a[1]}</strong>
+        </div>
+      `).join("");
+  }
 }

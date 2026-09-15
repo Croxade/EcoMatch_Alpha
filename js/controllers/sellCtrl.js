@@ -1,5 +1,5 @@
 import { $, $$, rupiah, toast } from '../utils/helpers.js';
-import { products, state, IMG } from '../models/db.js';
+import { products, state, matches, IMG } from '../models/db.js';
 import { page } from './uiCtrl.js';
 import { addCoins } from '../services/coinLogic.js';
 
@@ -42,15 +42,32 @@ export function initSellForm() {
     const price = Number($("#sellPrice").value);
     const imageMap = { Plastik: "plastic", Kertas: "cardboard", Kain: "clothes", Logam: "metal", Elektronik: "laptop" };
 
+    // Tambah data produk baru
     products.unshift({
       id: Date.now(), cat: selectedCat, name,
       img: IMG[imageMap[selectedCat] || "eco"],
       price, weight: kg + " kg", loc: $("#sellLocation").value, seller: "GreenSaver", match: 97, condition: $("#sellCondition").value
     });
 
+    // Generate Smart Match otomatis berdasarkan listing yang di-post
+    matches.unshift([
+      selectedCat.substring(0, 2).toUpperCase(),
+      "EcoPartner Hub",
+      name,
+      `${kg} kg`,
+      `${$("#sellLocation").value} · Pickup`,
+      "97%",
+      rupiah(price) + "/kg"
+    ]);
+
+    // Update akumulasi state dari 0
+    state.diverted += kg;
+    state.value += (kg * price);
+    state.co2 += Number((kg * 0.75).toFixed(1)); // Estimasi sederhana CO2 avoided
+
     state.history.unshift(["Listing baru · " + name, "+" + rupiah(kg * price), "Just now"]);
     addCoins(100, "Listing bonus");
-    page("market");
-    toast("Listing live. Smart Match sedang mencari buyer.");
+    page("dashboard");
+    toast("Listing live! Smart Match berhasil dibuat.");
   };
 }

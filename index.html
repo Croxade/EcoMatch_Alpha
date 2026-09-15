@@ -1,8 +1,10 @@
-<title>
-  EcoMatch — Circular Economy Platform
-</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoMatch — Circular Economy Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="app">
@@ -11,1931 +13,524 @@
         <img src="assets/logo.png" alt="EcoMatch">
         <span>
           ECOMATCH
-          <small>
-            BETA PLATFORM
-          </small>
+          <small>BETA PLATFORM</small>
         </span>
       </div>
       <div class="profile-mini">
-        <div class="avatar">
-          GS
-        </div>
+        <div class="avatar">GS</div>
         <div>
-          <b>
-            GreenSaver
-          </b>
-          <small>
-            Level 8 · Eco Warrior
-          </small>
+          <b>GreenSaver</b>
+          <small>Level 8 · Eco Warrior</small>
         </div>
-        <button id="profileMenu">
-          •••
-        </button>
+        <button id="profileMenu">•••</button>
       </div>
       <nav>
         <button class="nav active" data-page="dashboard">
-          <i>
-            ⌂
-          </i>
-          Overview
+          <i>⌂</i> Overview
         </button>
         <button class="nav" data-page="market">
-          <i>
-            ▦
-          </i>
-          Marketplace
-          <em id="navMarketBadge">
-            12
-          </em>
+          <i>▦</i> Marketplace <em id="navMarketBadge">0</em>
         </button>
         <button class="nav" data-page="matches">
-          <i>
-            ⌁
-          </i>
-          Smart Match
-          <em class="new">
-            AI
-          </em>
+          <i>⌁</i> Smart Match <em class="new">AI</em>
         </button>
         <button class="nav" data-page="sell">
-          <i>
-            ＋
-          </i>
-          Jual / Donasikan
+          <i>＋</i> Jual / Donasikan
         </button>
         <button class="nav" data-page="orders">
-          <i>
-            ▤
-          </i>
-          Pesanan & Pickup
+          <i>▤</i> Pesanan & Pickup
         </button>
         <button class="nav" data-page="messages">
-          <i>
-            ◌
-          </i>
-          Messages
-          <em id="msgBadge">
-            3
-          </em>
+          <i>◌</i> Messages <em id="msgBadge">0</em>
         </button>
-        <div class="nav-label">
-          ENGAGEMENT
-        </div>
+        <div class="nav-label">ENGAGEMENT</div>
         <button class="nav" data-page="learn">
-          <i>
-            ▧
-          </i>
-          EcoLearn
+          <i>▧</i> EcoLearn
         </button>
         <button class="nav" data-page="challenge">
-          <i>
-            ♧
-          </i>
-          Challenges
+          <i>♧</i> Challenges
         </button>
         <button class="nav" data-page="impact">
-          <i>
-            ◒
-          </i>
-          Impact Report
+          <i>◒</i> Impact Report
         </button>
-        <div class="nav-label">
-          ACCOUNT
-        </div>
+        <div class="nav-label">ACCOUNT</div>
         <button class="nav" data-page="wallet">
-          <i>
-            ◉
-          </i>
-          EcoWallet
+          <i>◉</i> EcoWallet
         </button>
         <button class="nav" data-page="settings">
-          <i>
-            ⚙
-          </i>
-          Settings
+          <i>⚙</i> Settings
         </button>
       </nav>
       <div class="sidebar-bottom">
         <div class="coin-mini">
-          <span>
-            EcoCoin
-          </span>
-          <strong id="sideCoins">
-            12.850
-          </strong>
-          <button data-page="wallet">
-            ↗
-          </button>
+          <span>EcoCoin</span>
+          <strong id="sideCoins">0</strong>
+          <button data-page="wallet">↗</button>
         </div>
         <button class="help-btn" id="helpBtn">
-          ?
-          <span>
-            Butuh bantuan?
-          </span>
+          ? <span>Butuh bantuan?</span>
         </button>
       </div>
     </aside>
+
     <main class="main">
       <header class="topbar">
-        <div class="mobile-menu" id="mobileMenu">
-          ☰
-        </div>
+        <div class="mobile-menu" id="mobileMenu">☰</div>
         <div class="page-heading">
-          <span id="crumb">
-            EcoMatch / Overview
-          </span>
-          <h1 id="pageTitle">
-            Good afternoon, GreenSaver.
-          </h1>
-          <p id="pageDesc">
-            Hari ini adalah hari yang bagus untuk mengubah sesuatu yang tidak terpakai menjadi bernilai.
-          </p>
+          <span id="crumb">EcoMatch / Overview</span>
+          <h1 id="pageTitle">Good afternoon, GreenSaver.</h1>
+          <p id="pageDesc">Mulai kelola dan ubah waste kamu jadi value hari ini.</p>
         </div>
         <div class="header-actions">
           <div class="global-search">
-            <span>
-              ⌕
-            </span>
+            <span>⌕</span>
             <input id="globalSearch" placeholder="Cari barang, material, perusahaan...">
-            <kbd>
-              ⌘ K
-            </kbd>
+            <kbd>⌘ K</kbd>
           </div>
           <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-            <span id="themeIcon">
-              ☾
-            </span>
+            <span id="themeIcon">☾</span>
           </button>
           <button class="icon-btn" id="notifBtn">
-            ♢
-            <b>
-              4
-            </b>
+            ♢ <b>0</b>
           </button>
           <button class="user-btn">
-            <div class="avatar sm">
-              GS
-            </div>
-            <span>
-              GreenSaver
-            </span>
-            ⌄
+            <div class="avatar sm">GS</div>
+            <span>GreenSaver</span> ⌄
           </button>
         </div>
       </header>
+
       <div id="pages">
         <section class="page active" id="dashboard">
           <div class="welcome">
             <div class="welcome-copy">
-              <span class="eyebrow">
-                YOUR CIRCULAR DASHBOARD
-              </span>
-              <h2>
-                Waste punya value.
-                <br>
-                <strong>
-                  Temukan siapa yang membutuhkannya.
-                </strong>
-              </h2>
-              <p>
-                EcoMatch menghubungkan rumah tangga, komunitas, dan bisnis dengan material yang masih punya nilai ekonomi.
-              </p>
+              <span class="eyebrow">YOUR CIRCULAR DASHBOARD</span>
+              <h2>Waste punya value.<br><strong>Temukan siapa yang membutuhkannya.</strong></h2>
+              <p>EcoMatch menghubungkan rumah tangga, komunitas, dan bisnis dengan material yang masih punya nilai ekonomi.</p>
               <div class="actions">
-                <button class="btn primary" data-page="sell">
-                  ＋ Post Waste
-                </button>
-                <button class="btn ghost" data-page="matches">
-                  Lihat Smart Match →
-                </button>
+                <button class="btn primary" data-page="sell">＋ Post Waste</button>
+                <button class="btn ghost" data-page="matches">Lihat Smart Match →</button>
               </div>
             </div>
             <div class="welcome-visual">
-              <div class="orb">
-              </div>
-              <div class="orbit o1">
-              </div>
-              <div class="orbit o2">
-              </div>
-              <div class="leaf-card">
-                ♻
-                <span>
-                  Circular
-                  <br>
-                  Economy
-                </span>
-              </div>
+              <div class="orb"></div>
+              <div class="orbit o1"></div>
+              <div class="orbit o2"></div>
+              <div class="leaf-card">♻<span>Circular<br>Economy</span></div>
               <div class="float-card fc1">
-                <b>
-                  + Rp 184K
-                </b>
-                <small>
-                  nilai waste bulan ini
-                </small>
+                <b>+ Rp 0</b>
+                <small>nilai waste bulan ini</small>
               </div>
               <div class="float-card fc2">
-                <b>
-                  42.8 kg
-                </b>
-                <small>
-                  dialihkan dari landfill
-                </small>
+                <b>0 kg</b>
+                <small>dialihkan dari landfill</small>
               </div>
             </div>
           </div>
+
           <div class="stat-grid">
             <div class="stat-card">
-              <div class="stat-icon green">
-                ♻
-              </div>
-              <span>
-                Total Waste Diverted
-              </span>
-              <strong>
-                42,8 kg
-              </strong>
-              <small class="up">
-                ↑ 18,4%
-                <i>
-                  vs bulan lalu
-                </i>
-              </small>
-              <div class="spark">
-                <i style="height:30%">
-                </i>
-                <i style="height:46%">
-                </i>
-                <i style="height:38%">
-                </i>
-                <i style="height:62%">
-                </i>
-                <i style="height:56%">
-                </i>
-                <i style="height:78%">
-                </i>
-                <i style="height:92%">
-                </i>
-              </div>
+              <div class="stat-icon green">♻</div>
+              <span>Total Waste Diverted</span>
+              <strong id="statDiverted">0 kg</strong>
+              <small class="up">↑ 0% <i>vs bulan lalu</i></small>
+              <div class="spark"><i style="height:10%"></i></div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon clay">
-                Rp
-              </div>
-              <span>
-                Waste Value Generated
-              </span>
-              <strong>
-                Rp 184.500
-              </strong>
-              <small class="up">
-                ↑ 24,7%
-                <i>
-                  vs bulan lalu
-                </i>
-              </small>
-              <div class="spark">
-                <i style="height:40%">
-                </i>
-                <i style="height:30%">
-                </i>
-                <i style="height:52%">
-                </i>
-                <i style="height:48%">
-                </i>
-                <i style="height:74%">
-                </i>
-                <i style="height:65%">
-                </i>
-                <i style="height:94%">
-                </i>
-              </div>
+              <div class="stat-icon clay">Rp</div>
+              <span>Waste Value Generated</span>
+              <strong id="statValue">Rp 0</strong>
+              <small class="up">↑ 0% <i>vs bulan lalu</i></small>
+              <div class="spark"><i style="height:10%"></i></div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon blue">
-                CO
-              </div>
-              <span>
-                EcoCoin Balance
-              </span>
-              <strong id="dashCoins">
-                12.850
-              </strong>
-              <small class="up">
-                ↑ 1.240
-                <i>
-                  earned this month
-                </i>
-              </small>
-              <div class="spark">
-                <i style="height:22%">
-                </i>
-                <i style="height:36%">
-                </i>
-                <i style="height:32%">
-                </i>
-                <i style="height:56%">
-                </i>
-                <i style="height:51%">
-                </i>
-                <i style="height:73%">
-                </i>
-                <i style="height:86%">
-                </i>
-              </div>
+              <div class="stat-icon blue">CO</div>
+              <span>EcoCoin Balance</span>
+              <strong id="dashCoins">0</strong>
+              <small class="up">↑ 0 <i>earned this month</i></small>
+              <div class="spark"><i style="height:10%"></i></div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon dark">
-                CO₂
-              </div>
-              <span>
-                Estimated CO₂ Avoided
-              </span>
-              <strong>
-                31,2 kg
-              </strong>
-              <small class="up">
-                Equivalent to 127 km by car
-              </small>
-              <div class="spark">
-                <i style="height:25%">
-                </i>
-                <i style="height:44%">
-                </i>
-                <i style="height:47%">
-                </i>
-                <i style="height:60%">
-                </i>
-                <i style="height:69%">
-                </i>
-                <i style="height:78%">
-                </i>
-                <i style="height:90%">
-                </i>
-              </div>
+              <div class="stat-icon dark">CO₂</div>
+              <span>Estimated CO₂ Avoided</span>
+              <strong id="statCo2">0 kg</strong>
+              <small class="up">Equivalent to 0 km by car</small>
+              <div class="spark"><i style="height:10%"></i></div>
             </div>
           </div>
+
           <div class="dashboard-grid">
             <div class="panel chart-panel">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Waste & Value Overview
-                  </h3>
-                  <p>
-                    Performance 30 hari terakhir
-                  </p>
+                  <h3>Waste & Value Overview</h3>
+                  <p>Performance 30 hari terakhir</p>
                 </div>
-                <select>
-                  <option>
-                    30 hari
-                  </option>
-                  <option>
-                    90 hari
-                  </option>
-                  <option>
-                    1 tahun
-                  </option>
-                </select>
+                <select><option>30 hari</option></select>
               </div>
               <div class="legend">
-                <span>
-                  <i>
-                  </i>
-                  Waste diverted
-                </span>
-                <span>
-                  <i>
-                  </i>
-                  Value generated
-                </span>
+                <span><i></i> Waste diverted</span>
+                <span><i></i> Value generated</span>
               </div>
               <div class="chart">
-                <div class="y y1">
-                  50 kg
-                </div>
-                <div class="y y2">
-                  40 kg
-                </div>
-                <div class="y y3">
-                  30 kg
-                </div>
-                <div class="y y4">
-                  20 kg
-                </div>
-                <div class="y y5">
-                  10 kg
-                </div>
                 <svg viewBox="0 0 700 220" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0" stop-opacity=".25"/>
-                      <stop offset="1" stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  <path class="area" d="M0,188 C55,175 60,150 120,158 S170,125 230,145 S285,108 350,126 S400,82 455,104 S505,70 565,88 S630,48 700,62 L700,220 L0,220Z"/>
-                  <path class="line" d="M0,188 C55,175 60,150 120,158 S170,125 230,145 S285,108 350,126 S400,82 455,104 S505,70 565,88 S630,48 700,62"/>
+                  <path class="area" d="M0,220 L700,220 Z"/>
+                  <path class="line" d="M0,220 L700,220"/>
                 </svg>
                 <div class="xlabels">
-                  <span>
-                    Jun 15
-                  </span>
-                  <span>
-                    Jun 20
-                  </span>
-                  <span>
-                    Jun 25
-                  </span>
-                  <span>
-                    Jun 30
-                  </span>
-                  <span>
-                    Jul 05
-                  </span>
-                  <span>
-                    Jul 10
-                  </span>
-                  <span>
-                    Jul 14
-                  </span>
+                  <span>Jun 15</span><span>Jun 25</span><span>Jul 05</span><span>Jul 14</span>
                 </div>
               </div>
             </div>
             <div class="panel goal-panel">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Monthly Mission
-                  </h3>
-                  <p>
-                    July 2026 · Personal target
-                  </p>
+                  <h3>Monthly Mission</h3>
+                  <p>July 2026 · Personal target</p>
                 </div>
-                <button class="dots">
-                  •••
-                </button>
+                <button class="dots">•••</button>
               </div>
               <div class="ring">
                 <div>
-                  <strong>
-                    72%
-                  </strong>
-                  <small>
-                    complete
-                  </small>
+                  <strong>0%</strong>
+                  <small>complete</small>
                 </div>
               </div>
-              <h4>
-                50 kg waste diverted
-              </h4>
-              <p class="muted">
-                Tinggal
-                <b>
-                  7,2 kg
-                </b>
-                lagi untuk mencapai target.
-              </p>
+              <h4>50 kg waste diverted</h4>
+              <p class="muted">Tinggal <b>50 kg</b> lagi untuk mencapai target.</p>
               <div class="goal-row">
-                <span>
-                  42,8 / 50 kg
-                </span>
-                <b>
-                  7 hari lagi
-                </b>
+                <span>0 / 50 kg</span>
+                <b>30 hari lagi</b>
               </div>
-              <div class="progress">
-                <i style="width:85.6%">
-                </i>
-              </div>
-              <button class="btn ghost full" data-page="challenge">
-                Lihat challenge →
-              </button>
+              <div class="progress"><i style="width:0%"></i></div>
+              <button class="btn ghost full" data-page="challenge">Lihat challenge →</button>
             </div>
           </div>
+
           <div class="dashboard-grid lower">
             <div class="panel">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Smart Match Untukmu
-                  </h3>
-                  <p>
-                    3 bisnis sedang mencari material yang kamu punya.
-                  </p>
+                  <h3>Smart Match Untukmu</h3>
+                  <p>Bisnis yang mencari material yang kamu punya.</p>
                 </div>
-                <button class="text-btn" data-page="matches">
-                  View all →
-                </button>
+                <button class="text-btn" data-page="matches">View all →</button>
               </div>
-              <div id="dashMatches">
-              </div>
+              <div id="dashMatches"></div>
             </div>
             <div class="panel">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Recent Activity
-                  </h3>
-                  <p>
-                    Aktivitas akun terbaru.
-                  </p>
+                  <h3>Recent Activity</h3>
+                  <p>Aktivitas akun terbaru.</p>
                 </div>
-                <button class="text-btn" data-page="orders">
-                  History →
-                </button>
+                <button class="text-btn" data-page="orders">History →</button>
               </div>
-              <div id="dashActivity">
-              </div>
+              <div id="dashActivity"></div>
             </div>
           </div>
         </section>
+
         <section class="page" id="market">
           <div class="market-hero">
             <div>
-              <span class="eyebrow">
-                ECOMATCH MARKETPLACE
-              </span>
-              <h2>
-                Temukan value dari barang yang ada.
-              </h2>
-              <p>
-                Listing dari individu, komunitas, dan bisnis. Beli material, jual waste, atau cari supplier.
-              </p>
+              <span class="eyebrow">ECOMATCH MARKETPLACE</span>
+              <h2>Temukan value dari barang yang ada.</h2>
+              <p>Listing dari individu, komunitas, dan bisnis. Beli material, jual waste, atau cari supplier.</p>
             </div>
             <div class="market-kpis">
-              <div>
-                <b>
-                  2.481
-                </b>
-                <span>
-                  active listings
-                </span>
-              </div>
-              <div>
-                <b>
-                  318
-                </b>
-                <span>
-                  buyers online
-                </span>
-              </div>
-              <div>
-                <b>
-                  94%
-                </b>
-                <span>
-                  match rate
-                </span>
-              </div>
+              <div><b>0</b><span>active listings</span></div>
+              <div><b>0</b><span>buyers online</span></div>
+              <div><b>0%</b><span>match rate</span></div>
             </div>
           </div>
           <div class="market-tools">
             <div class="search-wide">
-              ⌕
-              <input id="marketSearch" placeholder="Cari botol PET, kardus, pakaian, elektronik...">
+              ⌕ <input id="marketSearch" placeholder="Cari botol PET, kardus, pakaian, elektronik...">
             </div>
             <div class="filter-scroll" id="marketFilters">
-              <button class="filter active" data-filter="all">
-                Semua
-              </button>
-              <button class="filter" data-filter="Plastik">
-                Plastik
-              </button>
-              <button class="filter" data-filter="Kertas">
-                Kertas
-              </button>
-              <button class="filter" data-filter="Kain">
-                Kain
-              </button>
-              <button class="filter" data-filter="Logam">
-                Logam
-              </button>
-              <button class="filter" data-filter="Elektronik">
-                Elektronik
-              </button>
-              <button class="filter" data-filter="Organik">
-                Organik
-              </button>
+              <button class="filter active" data-filter="all">Semua</button>
+              <button class="filter" data-filter="Plastik">Plastik</button>
+              <button class="filter" data-filter="Kertas">Kertas</button>
+              <button class="filter" data-filter="Kain">Kain</button>
+              <button class="filter" data-filter="Logam">Logam</button>
+              <button class="filter" data-filter="Elektronik">Elektronik</button>
+              <button class="filter" data-filter="Organik">Organik</button>
             </div>
             <select id="marketSort">
-              <option value="match">
-                Best match
-              </option>
-              <option value="new">
-                Terbaru
-              </option>
-              <option value="high">
-                Harga tertinggi
-              </option>
-              <option value="low">
-                Harga terendah
-              </option>
+              <option value="match">Best match</option>
+              <option value="new">Terbaru</option>
+              <option value="high">Harga tertinggi</option>
+              <option value="low">Harga terendah</option>
             </select>
           </div>
           <div class="market-layout">
             <aside class="market-sidebar">
-              <b>
-                Refine results
-              </b>
-              <label>
-                Type
-              </label>
-              <div class="check">
-                <input type="checkbox" checked>
-                For sale
-                <span>
-                  1.824
-                </span>
-              </div>
-              <div class="check">
-                <input type="checkbox">
-                Donation
-                <span>
-                  421
-                </span>
-              </div>
-              <div class="check">
-                <input type="checkbox">
-                Wanted
-                <span>
-                  236
-                </span>
-              </div>
-              <label>
-                Distance
-              </label>
-              <input type="range" min="1" max="100" value="25" id="distanceRange">
-              <div class="range-label">
-                <span>
-                  1 km
-                </span>
-                <b id="distanceVal">
-                  25 km
-                </b>
-                <span>
-                  100 km
-                </span>
-              </div>
-              <label>
-                Condition
-              </label>
-              <div class="check">
-                <input type="checkbox" checked>
-                Clean / Sorted
-              </div>
-              <div class="check">
-                <input type="checkbox">
-                Mixed
-              </div>
-              <div class="check">
-                <input type="checkbox">
-                Damaged
-              </div>
-              <button class="reset-filter" id="resetFilters">
-                Reset filters
-              </button>
+              <b>Refine results</b>
+              <label>Type</label>
+              <div class="check"><input type="checkbox" checked> For sale <span>0</span></div>
+              <div class="check"><input type="checkbox"> Donation <span>0</span></div>
+              <button class="reset-filter" id="resetFilters">Reset filters</button>
             </aside>
             <div>
               <div class="results-line">
-                <span>
-                  <b id="resultCount">
-                    8
-                  </b>
-                  listings near you
-                </span>
-                <span>
-                  Showing
-                  <b>
-                    1–8
-                  </b>
-                  of 2.481
-                </span>
+                <span><b id="resultCount">0</b> listings near you</span>
+                <span>Showing <b>0</b> of 0</span>
               </div>
-              <div class="market-grid" id="marketGrid">
-              </div>
+              <div class="market-grid" id="marketGrid"></div>
             </div>
           </div>
         </section>
+
         <section class="page" id="matches">
           <div class="match-header">
             <div>
-              <span class="eyebrow">
-                SMART MATCH ENGINE
-              </span>
-              <h2>
-                We found your next opportunity.
-              </h2>
-              <p>
-                Match dibuat berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer.
-              </p>
+              <span class="eyebrow">SMART MATCH ENGINE</span>
+              <h2>We found your next opportunity.</h2>
+              <p>Match dibuat berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer.</p>
             </div>
             <div class="match-score">
-              <span>
-                Your match profile
-              </span>
-              <strong>
-                92%
-              </strong>
-              <small>
-                Very strong
-              </small>
+              <span>Your match profile</span>
+              <strong>0%</strong>
+              <small>No listings yet</small>
             </div>
           </div>
-          <div class="match-controls">
-            <button class="pill active">
-              Recommended
-            </button>
-            <button class="pill">
-              Nearby
-            </button>
-            <button class="pill">
-              Highest value
-            </button>
-            <button class="pill">
-              Urgent demand
-            </button>
-            <button class="btn ghost" data-page="sell">
-              ＋ Add material
-            </button>
-          </div>
-          <div id="matchList" class="match-list">
-          </div>
+          <div id="matchList" class="match-list"></div>
         </section>
+
         <section class="page" id="sell">
           <div class="sell-header">
             <div>
-              <span class="eyebrow">
-                TURN WASTE INTO VALUE
-              </span>
-              <h2>
-                Create a listing.
-              </h2>
-              <p>
-                Post dalam kurang dari 2 menit. EcoMatch akan mencarikan buyer yang relevan.
-              </p>
+              <span class="eyebrow">TURN WASTE INTO VALUE</span>
+              <h2>Create a listing.</h2>
+              <p>Post dalam kurang dari 2 menit. EcoMatch akan mencarikan buyer yang relevan.</p>
             </div>
-            <div class="draft-status">
-              ● Auto-save on
-            </div>
+            <div class="draft-status">● Auto-save on</div>
           </div>
           <div class="sell-layout">
             <div class="sell-main">
               <div class="stepper">
-                <span class="active">
-                  01
-                  <b>
-                    Material
-                  </b>
-                </span>
-                <i>
-                </i>
-                <span>
-                  02
-                  <b>
-                    Details
-                  </b>
-                </span>
-                <i>
-                </i>
-                <span>
-                  03
-                  <b>
-                    Pickup
-                  </b>
-                </span>
+                <span class="active">01 <b>Material</b></span><i></i>
+                <span>02 <b>Details</b></span><i></i>
+                <span>03 <b>Pickup</b></span>
               </div>
               <form id="sellForm">
                 <div class="form-section">
-                  <h3>
-                    What are you offering?
-                  </h3>
-                  <p>
-                    Pilih kategori yang paling mendekati.
-                  </p>
+                  <h3>What are you offering?</h3>
+                  <p>Pilih kategori yang paling mendekati.</p>
                   <div class="category-grid" id="sellCategories">
-                    <button type="button" class="cat active" data-cat="Plastik">
-                      ♢
-                      <b>
-                        Plastik
-                      </b>
-                      <small>
-                        PET, HDPE, PP
-                      </small>
-                    </button>
-                    <button type="button" class="cat" data-cat="Kertas">
-                      ▤
-                      <b>
-                        Kertas
-                      </b>
-                      <small>
-                        Kardus, HVS, koran
-                      </small>
-                    </button>
-                    <button type="button" class="cat" data-cat="Kain">
-                      ▱
-                      <b>
-                        Kain
-                      </b>
-                      <small>
-                        Pakaian, tekstil
-                      </small>
-                    </button>
-                    <button type="button" class="cat" data-cat="Logam">
-                      ◈
-                      <b>
-                        Logam
-                      </b>
-                      <small>
-                        Aluminium, besi
-                      </small>
-                    </button>
-                    <button type="button" class="cat" data-cat="Elektronik">
-                      ▣
-                      <b>
-                        Elektronik
-                      </b>
-                      <small>
-                        Gadget, komputer
-                      </small>
-                    </button>
-                    <button type="button" class="cat" data-cat="Organik">
-                      ♧
-                      <b>
-                        Organik
-                      </b>
-                      <small>
-                        Kompos, sisa makanan
-                      </small>
-                    </button>
+                    <button type="button" class="cat active" data-cat="Plastik">♢ <b>Plastik</b><small>PET, HDPE, PP</small></button>
+                    <button type="button" class="cat" data-cat="Kertas">▤ <b>Kertas</b><small>Kardus, HVS, koran</small></button>
+                    <button type="button" class="cat" data-cat="Kain">▱ <b>Kain</b><small>Pakaian, tekstil</small></button>
+                    <button type="button" class="cat" data-cat="Logam">◈ <b>Logam</b><small>Aluminium, besi</small></button>
+                    <button type="button" class="cat" data-cat="Elektronik">▣ <b>Elektronik</b><small>Gadget, komputer</small></button>
+                    <button type="button" class="cat" data-cat="Organik">♧ <b>Organik</b><small>Kompos, sisa makanan</small></button>
                   </div>
                 </div>
                 <div class="form-section">
                   <div class="two-form">
-                    <label>
-                      Nama material
-                      <input id="sellName" required placeholder="Contoh: Botol PET bening">
-                    </label>
-                    <label>
-                      Estimasi berat
-                      <input id="sellWeight" type="number" min="0.1" step=".1" value="10" required>
-                      <span>
-                        kg
-                      </span>
-                    </label>
+                    <label>Nama material <input id="sellName" required placeholder="Contoh: Botol PET bening"></label>
+                    <label>Estimasi berat <input id="sellWeight" type="number" min="0.1" step=".1" value="10" required> <span>kg</span></label>
                   </div>
-                  <label>
-                    Kondisi material
+                  <label>Kondisi material
                     <select id="sellCondition">
-                      <option>
-                        Clean & sorted — siap diproses
-                      </option>
-                      <option>
-                        Mixed — perlu sortir
-                      </option>
-                      <option>
-                        Damaged — perlu treatment
-                      </option>
+                      <option>Clean & sorted — siap diproses</option>
+                      <option>Mixed — perlu sortir</option>
+                      <option>Damaged — perlu treatment</option>
                     </select>
                   </label>
-                  <label>
-                    Deskripsi
-                    <textarea id="sellDesc" placeholder="Contoh: botol bening, sudah dilepas label dan tutup, dikumpulkan dari event kampus.">
-                    </textarea>
-                  </label>
+                  <label>Deskripsi <textarea id="sellDesc" placeholder="Contoh: botol bening, sudah dilepas label dan tutup."></textarea></label>
                 </div>
                 <div class="form-section">
-                  <h3>
-                    Pickup & pricing
-                  </h3>
+                  <h3>Pickup & pricing</h3>
                   <div class="two-form">
-                    <label>
-                      Lokasi pickup
-                      <input id="sellLocation" required value="Jakarta Selatan">
-                    </label>
-                    <label>
-                      Harga yang diharapkan
-                      <input id="sellPrice" type="number" value="2500">
-                      <span>
-                        Rp / kg
-                      </span>
-                    </label>
-                  </div>
-                  <div class="toggle-row">
-                    <div>
-                      <b>
-                        Open to negotiation
-                      </b>
-                      <small>
-                        Buyer dapat mengajukan harga.
-                      </small>
-                    </div>
-                    <input type="checkbox" checked>
-                  </div>
-                  <div class="toggle-row">
-                    <div>
-                      <b>
-                        EcoMatch pickup
-                      </b>
-                      <small>
-                        Kami bantu atur partner logistik.
-                      </small>
-                    </div>
-                    <input type="checkbox" checked>
+                    <label>Lokasi pickup <input id="sellLocation" required value="Jakarta Selatan"></label>
+                    <label>Harga yang diharapkan <input id="sellPrice" type="number" value="2500"> <span>Rp / kg</span></label>
                   </div>
                 </div>
-                <button class="btn primary publish" type="submit">
-                  Publish listing & find matches →
-                </button>
+                <button class="btn primary publish" type="submit">Publish listing & find matches →</button>
               </form>
             </div>
             <aside class="listing-preview">
-              <div class="preview-label">
-                LIVE PREVIEW
-              </div>
+              <div class="preview-label">LIVE PREVIEW</div>
               <div class="preview-card">
-                <div class="preview-photo" id="previewPhoto">
-                  ♻
-                </div>
-                <span class="badge" id="previewCat">
-                  PLASTIK
-                </span>
-                <h3 id="previewName">
-                  Botol PET bening
-                </h3>
-                <p id="previewDesc">
-                  Clean & sorted — siap diproses
-                </p>
-                <strong id="previewPrice">
-                  Rp 2.500
-                  <small>
-                    / kg
-                  </small>
-                </strong>
-                <div class="preview-meta">
-                  ⌖ Jakarta Selatan
-                  <span>
-                    •
-                  </span>
-                  10 kg
-                </div>
-                <button disabled>
-                  Buyer matching...
-                </button>
+                <div class="preview-photo" id="previewPhoto">♻</div>
+                <span class="badge" id="previewCat">PLASTIK</span>
+                <h3 id="previewName">Botol PET bening</h3>
+                <p id="previewDesc">Clean & sorted — siap diproses</p>
+                <strong id="previewPrice">Rp 2.500 <small>/ kg</small></strong>
+                <div class="preview-meta">⌖ Jakarta Selatan <span>•</span> 10 kg</div>
+                <button disabled>Buyer matching...</button>
               </div>
               <div class="estimate-box">
-                <span>
-                  Estimated total value
-                </span>
-                <strong id="estimate">
-                  Rp 25.000
-                </strong>
-                <small>
-                  based on current market rate
-                </small>
+                <span>Estimated total value</span>
+                <strong id="estimate">Rp 25.000</strong>
+                <small>based on current market rate</small>
               </div>
             </aside>
           </div>
         </section>
+
         <section class="page" id="orders">
           <div class="page-top">
             <div>
-              <span class="eyebrow">
-                TRANSACTIONS
-              </span>
-              <h2>
-                Orders & Pickup
-              </h2>
-              <p>
-                Kelola proses dari deal sampai material diterima buyer.
-              </p>
+              <span class="eyebrow">TRANSACTIONS</span>
+              <h2>Orders & Pickup</h2>
+              <p>Kelola proses dari deal sampai material diterima buyer.</p>
             </div>
-            <button class="btn ghost">
-              Export CSV ↓
-            </button>
-          </div>
-          <div class="order-tabs">
-            <button class="active">
-              All
-              <b>
-                6
-              </b>
-            </button>
-            <button>
-              Waiting pickup
-              <b>
-                2
-              </b>
-            </button>
-            <button>
-              In transit
-              <b>
-                1
-              </b>
-            </button>
-            <button>
-              Completed
-              <b>
-                3
-              </b>
-            </button>
           </div>
           <div class="orders-table">
             <div class="tr th">
-              <span>
-                ORDER
-              </span>
-              <span>
-                PARTNER
-              </span>
-              <span>
-                STATUS
-              </span>
-              <span>
-                VALUE
-              </span>
-              <span>
-                DATE
-              </span>
-              <span>
-              </span>
+              <span>ORDER</span><span>PARTNER</span><span>STATUS</span><span>VALUE</span><span>DATE</span><span></span>
             </div>
-            <div id="ordersRows">
-            </div>
+            <div id="ordersRows"></div>
           </div>
         </section>
+
         <section class="page" id="messages">
           <div class="messages-layout">
             <div class="conversation-list">
               <div class="conversation-head">
-                <h3>
-                  Messages
-                </h3>
-                <button>
-                  ＋
-                </button>
+                <h3>Messages</h3>
+                <button>＋</button>
               </div>
-              <div class="message-search">
-                ⌕
-                <input placeholder="Search conversation">
-              </div>
-              <div id="conversationList">
-              </div>
+              <div id="conversationList"></div>
             </div>
             <div class="chat">
               <div class="chat-head">
-                <div class="avatar">
-                  ER
-                </div>
-                <div>
-                  <b>
-                    EcoRecycle Indonesia
-                  </b>
-                  <small>
-                    ● Online · Buyer
-                  </small>
-                </div>
-                <button>
-                  •••
-                </button>
+                <div class="avatar">ER</div>
+                <div><b>EcoRecycle Indonesia</b><small>● Online · Buyer</small></div>
               </div>
               <div class="chat-body" id="chatBody">
-                <div class="date">
-                  Today
-                </div>
-                <div class="bubble other">
-                  Halo! Kami sedang mencari PET bening sekitar 50–100 kg untuk produksi minggu ini.
-                </div>
-                <div class="bubble me">
-                  Hi! Aku punya 10 kg sekarang. Apakah ada minimum quantity?
-                </div>
-                <div class="bubble other">
-                  Untuk batch pertama 10 kg bisa. Pickup bisa kami jadwalkan besok.
-                </div>
-                <div class="bubble other offer">
-                  <small>
-                    OFFER
-                  </small>
-                  <b>
-                    Rp 2.750 / kg
-                  </b>
-                  <span>
-                    10 kg · Pickup tomorrow
-                  </span>
-                  <button class="accept-offer" id="acceptOffer">
-                    Accept offer
-                  </button>
-                </div>
+                <div class="date">Today</div>
+                <div class="bubble other">Halo! Silakan post material kamu untuk mulai terhubung dengan partner kami.</div>
               </div>
               <form class="chat-input" id="chatForm">
                 <input id="chatMessage" placeholder="Tulis pesan...">
-                <button>
-                  ↑
-                </button>
+                <button>↑</button>
               </form>
             </div>
           </div>
         </section>
+
         <section class="page" id="learn">
           <div class="learn-hero">
             <div>
-              <span class="eyebrow">
-                ECOMATCH LEARN
-              </span>
-              <h2>
-                Scroll. Learn. Earn. Impact.
-              </h2>
-              <p>
-                Konten pendek tentang circular economy. Setiap selesai, kamu mendapat EcoCoin yang benar-benar bisa digunakan.
-              </p>
+              <span class="eyebrow">ECOMATCH LEARN</span>
+              <h2>Scroll. Learn. Earn. Impact.</h2>
+              <p>Konten pendek tentang circular economy. Setiap selesai, kamu mendapat EcoCoin.</p>
             </div>
             <div>
-              <strong>
-                1.240 EC
-              </strong>
-              <small>
-                earned from learning
-              </small>
+              <strong>0 EC</strong>
+              <small>earned from learning</small>
             </div>
           </div>
-          <div class="learn-tabs">
-            <button class="active">
-              For You
-            </button>
-            <button>
-              Plastic
-            </button>
-            <button>
-              Textile
-            </button>
-            <button>
-              Business
-            </button>
-            <button>
-              Climate
-            </button>
-          </div>
-          <div class="learn-grid" id="learnGrid">
-          </div>
+          <div class="learn-grid" id="learnGrid"></div>
         </section>
+
         <section class="page" id="challenge">
           <div class="challenge-banner">
             <div>
-              <span class="eyebrow">
-                COMMUNITY CHALLENGE
-              </span>
-              <h2>
-                30 Days Circular
-              </h2>
-              <p>
-                Komunitas EcoMatch sudah mengalihkan
-                <b>
-                  4,8 ton
-                </b>
-                material bulan ini.
-              </p>
-            </div>
-            <div class="community-progress">
-              <strong>
-                68%
-              </strong>
-              <span>
-                community goal
-              </span>
-              <div class="progress">
-                <i style="width:68%">
-                </i>
-              </div>
+              <span class="eyebrow">COMMUNITY CHALLENGE</span>
+              <h2>30 Days Circular</h2>
+              <p>Selesaikan misi untuk mendapatkan reward EcoCoin.</p>
             </div>
           </div>
           <div class="challenge-columns">
             <div class="panel">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Your missions
-                  </h3>
-                  <p>
-                    Complete untuk unlock reward.
-                  </p>
+                  <h3>Your missions</h3>
+                  <p>Complete untuk unlock reward.</p>
                 </div>
-                <span class="reward-pill">
-                  520 EC available
-                </span>
               </div>
-              <div id="challengeList">
-              </div>
+              <div id="challengeList"></div>
             </div>
             <div class="panel leaderboard">
               <div class="panel-head">
                 <div>
-                  <h3>
-                    Community leaderboard
-                  </h3>
-                  <p>
-                    Top circular warriors this week.
-                  </p>
+                  <h3>Community leaderboard</h3>
+                  <p>Top circular warriors this week.</p>
                 </div>
               </div>
-              <div id="leaderboard">
-              </div>
+              <div id="leaderboard"></div>
             </div>
           </div>
         </section>
+
         <section class="page" id="impact">
           <div class="impact-header">
             <div>
-              <span class="eyebrow">
-                YOUR IMPACT
-              </span>
-              <h2>
-                Make your waste visible.
-              </h2>
-              <p>
-                Data sederhana yang menunjukkan kontribusi kamu terhadap circular economy.
-              </p>
+              <span class="eyebrow">YOUR IMPACT</span>
+              <h2>Make your waste visible.</h2>
+              <p>Data sederhana yang menunjukkan kontribusi kamu.</p>
             </div>
-            <button class="btn primary" id="downloadReport">
-              ↓ Download Impact Report
-            </button>
+            <button class="btn primary" id="downloadReport">↓ Download Impact Report</button>
           </div>
           <div class="impact-kpi">
-            <div>
-              <span>
-                Waste diverted
-              </span>
-              <strong>
-                42,8 kg
-              </strong>
-              <small>
-                ↑ 18,4% YoY
-              </small>
-            </div>
-            <div>
-              <span>
-                CO₂ avoided
-              </span>
-              <strong>
-                31,2 kg
-              </strong>
-              <small>
-                ≈ 127 km driving
-              </small>
-            </div>
-            <div>
-              <span>
-                Water saved
-              </span>
-              <strong>
-                1.820 L
-              </strong>
-              <small>
-                estimated equivalent
-              </small>
-            </div>
-            <div>
-              <span>
-                Value created
-              </span>
-              <strong>
-                Rp184,5K
-              </strong>
-              <small>
-                direct material value
-              </small>
-            </div>
-          </div>
-          <div class="impact-grid">
-            <div class="panel">
-              <div class="panel-head">
-                <div>
-                  <h3>
-                    Material composition
-                  </h3>
-                  <p>
-                    All diverted waste
-                  </p>
-                </div>
-              </div>
-              <div class="donut-wrap">
-                <div class="donut">
-                  <div>
-                    <b>
-                      42,8
-                    </b>
-                    <small>
-                      kg total
-                    </small>
-                  </div>
-                </div>
-                <div class="donut-legend">
-                  <span>
-                    <i>
-                    </i>
-                    Plastik
-                    <b>
-                      41%
-                    </b>
-                  </span>
-                  <span>
-                    <i>
-                    </i>
-                    Kertas
-                    <b>
-                      27%
-                    </b>
-                  </span>
-                  <span>
-                    <i>
-                    </i>
-                    Kain
-                    <b>
-                      19%
-                    </b>
-                  </span>
-                  <span>
-                    <i>
-                    </i>
-                    Logam
-                    <b>
-                      9%
-                    </b>
-                  </span>
-                  <span>
-                    <i>
-                    </i>
-                    Lainnya
-                    <b>
-                      4%
-                    </b>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-head">
-                <div>
-                  <h3>
-                    Impact timeline
-                  </h3>
-                  <p>
-                    Your progress this year
-                  </p>
-                </div>
-              </div>
-              <div class="timeline">
-                <div>
-                  <b>
-                    July
-                  </b>
-                  <span>
-                    42,8 kg
-                  </span>
-                  <i style="height:88%">
-                  </i>
-                </div>
-                <div>
-                  <b>
-                    June
-                  </b>
-                  <span>
-                    36,1 kg
-                  </span>
-                  <i style="height:72%">
-                  </i>
-                </div>
-                <div>
-                  <b>
-                    May
-                  </b>
-                  <span>
-                    31,7 kg
-                  </span>
-                  <i style="height:63%">
-                  </i>
-                </div>
-                <div>
-                  <b>
-                    April
-                  </b>
-                  <span>
-                    27,3 kg
-                  </span>
-                  <i style="height:54%">
-                  </i>
-                </div>
-                <div>
-                  <b>
-                    March
-                  </b>
-                  <span>
-                    24,9 kg
-                  </span>
-                  <i style="height:49%">
-                  </i>
-                </div>
-                <div>
-                  <b>
-                    Feb
-                  </b>
-                  <span>
-                    19,4 kg
-                  </span>
-                  <i style="height:38%">
-                  </i>
-                </div>
-              </div>
-            </div>
+            <div><span>Waste diverted</span><strong>0 kg</strong></div>
+            <div><span>CO₂ avoided</span><strong>0 kg</strong></div>
+            <div><span>Water saved</span><strong>0 L</strong></div>
+            <div><span>Value created</span><strong>Rp 0</strong></div>
           </div>
         </section>
+
         <section class="page" id="wallet">
           <div class="wallet-layout">
             <div class="wallet-card-big">
               <div class="wallet-top">
-                <span>
-                  ECOMATCH ECOWALLET
-                </span>
-                <button>
-                  •••
-                </button>
+                <span>ECOMATCH ECOWALLET</span>
               </div>
-              <small>
-                Available balance
-              </small>
-              <strong id="walletCoins">
-                12.850
-              </strong>
-              <div class="wallet-number">
-                EC  ·  0826  ·  1845
-              </div>
+              <small>Available balance</small>
+              <strong id="walletCoins">0</strong>
+              <div class="wallet-number">EC · 0826 · 1845</div>
               <div class="wallet-bottom">
-                <span>
-                  GreenSaver
-                </span>
-                <span>
-                  EcoCoin
-                </span>
+                <span>GreenSaver</span>
+                <span>EcoCoin</span>
               </div>
             </div>
             <div class="wallet-side">
-              <div>
-                <span>
-                  Earned this month
-                </span>
-                <b>
-                  +1.240 EC
-                </b>
-              </div>
-              <div>
-                <span>
-                  Redeemed
-                </span>
-                <b>
-                  −650 EC
-                </b>
-              </div>
-              <button class="btn primary full" data-redeem="1000">
-                Redeem EcoCoin →
-              </button>
+              <div><span>Earned</span><b>0 EC</b></div>
+              <div><span>Redeemed</span><b>0 EC</b></div>
+              <button class="btn primary full" data-redeem="500">Redeem EcoCoin →</button>
             </div>
           </div>
           <div class="wallet-content">
             <div class="panel">
               <div class="panel-head">
-                <div>
-                  <h3>
-                    How you earned
-                  </h3>
-                  <p>
-                    Last 30 days
-                  </p>
-                </div>
+                <div><h3>How you earned</h3></div>
               </div>
-              <div id="walletActivity">
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-head">
-                <div>
-                  <h3>
-                    Reward store
-                  </h3>
-                  <p>
-                    Use your EcoCoin.
-                  </p>
-                </div>
-              </div>
-              <div class="reward-grid">
-                <button data-redeem="500">
-                  <b>
-                    500 EC
-                  </b>
-                  <span>
-                    Rp 500 e-wallet
-                  </span>
-                  <small>
-                    Redeem
-                  </small>
-                </button>
-                <button data-redeem="2500">
-                  <b>
-                    2.500 EC
-                  </b>
-                  <span>
-                    Rp 2.500 e-wallet
-                  </span>
-                  <small>
-                    Redeem
-                  </small>
-                </button>
-                <button data-redeem="5000">
-                  <b>
-                    5.000 EC
-                  </b>
-                  <span>
-                    Rp 5.000 e-wallet
-                  </span>
-                  <small>
-                    Redeem
-                  </small>
-                </button>
-                <button>
-                  <b>
-                    10.000 EC
-                  </b>
-                  <span>
-                    Tree planting
-                  </span>
-                  <small>
-                    Coming soon
-                  </small>
-                </button>
-              </div>
+              <div id="walletActivity"></div>
             </div>
           </div>
         </section>
+
         <section class="page" id="settings">
           <div class="page-top">
             <div>
-              <span class="eyebrow">
-                ACCOUNT
-              </span>
-              <h2>
-                Settings
-              </h2>
-              <p>
-                Atur pengalaman EcoMatch sesuai kebutuhanmu.
-              </p>
+              <span class="eyebrow">ACCOUNT</span>
+              <h2>Settings</h2>
+              <p>Atur pengalaman EcoMatch sesuai kebutuhanmu.</p>
             </div>
             <div class="settings-actions">
-              <span id="settingsSaved" class="save-state">
-                All changes saved
-              </span>
-              <button class="btn ghost" id="resetSettings">
-                Reset
-              </button>
-              <button class="btn primary" id="saveSettings">
-                Save changes
-              </button>
+              <span id="settingsSaved" class="save-state">All changes saved</span>
+              <button class="btn ghost" id="resetSettings">Reset</button>
+              <button class="btn primary" id="saveSettings">Save changes</button>
             </div>
           </div>
           <div class="settings-grid">
             <div class="settings-nav" id="settingsTabs">
-              <button class="active" data-settings-tab="profile">
-                Profile
-              </button>
-              <button data-settings-tab="notifications">
-                Notifications
-                <span class="tab-dot">
-                </span>
-              </button>
-              <button data-settings-tab="privacy">
-                Privacy
-              </button>
-              <button data-settings-tab="pickup">
-                Pickup preferences
-              </button>
+              <button class="active" data-settings-tab="profile">Profile</button>
+              <button data-settings-tab="notifications">Notifications</button>
+              <button data-settings-tab="privacy">Privacy</button>
+              <button data-settings-tab="pickup">Pickup preferences</button>
             </div>
             <div class="panel settings-panel">
               <div class="settings-pane active" data-settings-pane="profile">
-                <h3>
-                  Profile information
-                </h3>
-                <p>
-                  Informasi ini membantu Smart Match bekerja lebih akurat.
-                </p>
+                <h3>Profile information</h3>
                 <div class="form-grid">
-                  <label>
-                    Display name
-                    <input id="setName" value="GreenSaver">
-                  </label>
-                  <label>
-                    City
-                    <input id="setCity" value="Jakarta Selatan">
-                  </label>
-                  <label>
-                    Preferred material
-                    <select id="setMaterial">
-                      <option>
-                        Plastik
-                      </option>
-                      <option>
-                        Kertas
-                      </option>
-                      <option>
-                        Kain
-                      </option>
-                      <option>
-                        Logam
-                      </option>
-                      <option>
-                        Elektronik
-                      </option>
-                      <option>
-                        Organik
-                      </option>
-                    </select>
-                  </label>
-                  <label>
-                    Account type
-                    <select id="setAccount">
-                      <option>
-                        Individual
-                      </option>
-                      <option>
-                        Community
-                      </option>
-                      <option>
-                        Business
-                      </option>
-                    </select>
-                  </label>
-                  <label class="wide">
-                    About you
-                    <textarea id="setAbout">
-                      Interested in reducing household waste and finding responsible buyers.
-                    </textarea>
-                  </label>
-                </div>
-                <hr>
-                <h3>
-                  Smart Match preferences
-                </h3>
-                <div class="toggle-row">
-                  <div>
-                    <b>
-                      Notify me when a strong match appears
-                    </b>
-                    <small>
-                      Notify when match score is above 80%.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setMatchNotify" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="toggle-row">
-                  <div>
-                    <b>
-                      Show pickup partners
-                    </b>
-                    <small>
-                      Include verified logistics partners in recommendations.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setShowPartners" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              <div class="settings-pane" data-settings-pane="notifications">
-                <h3>
-                  Notification center
-                </h3>
-                <p>
-                  Pilih update yang penting buat kamu.
-                </p>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Smart Match alerts
-                    </b>
-                    <small>
-                      Buyer baru, demand tinggi, dan match score di atas threshold.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setNotifMatch" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Order & pickup updates
-                    </b>
-                    <small>
-                      Status pickup, ETA, dan konfirmasi penerimaan material.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setNotifOrder" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      EcoLearn & challenge rewards
-                    </b>
-                    <small>
-                      Reminder ketika reward baru atau mission tersedia.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setNotifReward" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Weekly impact summary
-                    </b>
-                    <small>
-                      Ringkasan waste diverted dan value yang kamu hasilkan.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setNotifWeekly" type="checkbox">
-                    <span>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              <div class="settings-pane" data-settings-pane="privacy">
-                <h3>
-                  Privacy & visibility
-                </h3>
-                <p>
-                  Kontrol bagaimana profil dan listing kamu terlihat di EcoMatch.
-                </p>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Public profile
-                    </b>
-                    <small>
-                      Nama dan level Eco Warrior dapat dilihat oleh pengguna lain.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setPublicProfile" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Show approximate location
-                    </b>
-                    <small>
-                      Tampilkan area seperti Jakarta Selatan, bukan alamat lengkap.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setApproxLocation" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Activity on leaderboard
-                    </b>
-                    <small>
-                      Izinkan progress kamu muncul di community leaderboard.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setLeaderboard" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="privacy-note">
-                  EcoMatch tidak menampilkan alamat pickup lengkap ke publik. Detail pickup hanya dibagikan setelah transaksi dikonfirmasi.
-                </div>
-              </div>
-              <div class="settings-pane" data-settings-pane="pickup">
-                <h3>
-                  Pickup preferences
-                </h3>
-                <p>
-                  Atur cara material kamu biasanya dikumpulkan.
-                </p>
-                <div class="form-grid">
-                  <label>
-                    Preferred method
-                    <select id="setPickupMethod">
-                      <option>
-                        EcoMatch Pickup
-                      </option>
-                      <option>
-                        Drop-off point
-                      </option>
-                      <option>
-                        Self delivery
-                      </option>
-                    </select>
-                  </label>
-                  <label>
-                    Pickup radius
-                    <select id="setPickupRadius">
-                      <option>
-                        0–5 km
-                      </option>
-                      <option>
-                        0–10 km
-                      </option>
-                      <option>
-                        0–25 km
-                      </option>
-                      <option>
-                        0–50 km
-                      </option>
-                    </select>
-                  </label>
-                  <label>
-                    Preferred day
-                    <select id="setPickupDay">
-                      <option>
-                        Weekdays
-                      </option>
-                      <option>
-                        Saturday
-                      </option>
-                      <option>
-                        Sunday
-                      </option>
-                      <option>
-                        Any day
-                      </option>
-                    </select>
-                  </label>
-                  <label>
-                    Preferred time
-                    <select id="setPickupTime">
-                      <option>
-                        09:00–12:00
-                      </option>
-                      <option>
-                        12:00–15:00
-                      </option>
-                      <option>
-                        15:00–18:00
-                      </option>
-                      <option>
-                        Any time
-                      </option>
-                    </select>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Auto-suggest pickup
-                    </b>
-                    <small>
-                      Suggest the best verified pickup partner when a deal is accepted.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setAutoPickup" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
-                </div>
-                <div class="setting-option">
-                  <div>
-                    <b>
-                      Require pickup confirmation
-                    </b>
-                    <small>
-                      Ask for confirmation before sharing pickup details with the buyer.
-                    </small>
-                  </div>
-                  <label class="switch">
-                    <input id="setPickupConfirm" type="checkbox" checked>
-                    <span>
-                    </span>
-                  </label>
+                  <label>Display name <input id="setName" value="GreenSaver"></label>
+                  <label>City <input id="setCity" value="Jakarta Selatan"></label>
                 </div>
               </div>
             </div>
@@ -1944,89 +539,31 @@
       </div>
     </main>
   </div>
+
   <div class="modal" id="detailModal">
-    <div class="backdrop" data-close>
-    </div>
+    <div class="backdrop" data-close></div>
     <div class="modal-box product-modal">
-      <button class="modal-x" data-close>
-        ×
-      </button>
-      <img id="modalImg">
+      <button class="modal-x" data-close>×</button>
+      <img id="modalImg" alt="">
       <div class="modal-body">
-        <span class="badge" id="modalBadge">
-        </span>
-        <h2 id="modalTitle">
-        </h2>
-        <p id="modalInfo">
-        </p>
-        <div class="modal-price" id="modalPrice">
-        </div>
+        <span class="badge" id="modalBadge"></span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalInfo"></p>
+        <div class="modal-price" id="modalPrice"></div>
         <div class="modal-data">
-          <span id="modalLoc">
-          </span>
-          <span id="modalSeller">
-          </span>
-          <span id="modalMatch">
-          </span>
+          <span id="modalLoc"></span>
+          <span id="modalSeller"></span>
+          <span id="modalMatch"></span>
         </div>
         <div class="modal-actions">
-          <button class="btn ghost" id="saveListing">
-            ♡ Save
-          </button>
-          <button class="btn primary" id="contactSeller">
-            Message seller
-          </button>
+          <button class="btn ghost" id="saveListing">♡ Save</button>
+          <button class="btn primary" id="contactSeller">Message seller</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal" id="notifModal">
-    <div class="backdrop" data-close>
-    </div>
-    <div class="modal-box notif-box">
-      <button class="modal-x" data-close>
-        ×
-      </button>
-      <h3>
-        Notifications
-      </h3>
-      <div class="notif">
-        <b>
-          New Smart Match
-        </b>
-        <span>
-          EcoRecycle Indonesia needs PET · 92% match
-        </span>
-        <small>
-          5 min ago
-        </small>
-      </div>
-      <div class="notif">
-        <b>
-          EcoCoin earned
-        </b>
-        <span>
-          +50 EC from EcoLearn
-        </span>
-        <small>
-          32 min ago
-        </small>
-      </div>
-      <div class="notif">
-        <b>
-          Pickup confirmed
-        </b>
-        <span>
-          Order #ECM-1842 · Tomorrow 09:00
-        </span>
-        <small>
-          1 hour ago
-        </small>
-      </div>
-    </div>
-  </div>
-  <div class="toast" id="toast">
-  </div>
+
+  <div class="toast" id="toast"></div>
   <script type="module" src="app.js"></script>
 </body>
 </html>
