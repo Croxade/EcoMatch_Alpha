@@ -12,11 +12,21 @@ const safeListen = (id, event, callback) => {
 };
 
 document.addEventListener("click", (e) => {
+  // 1. Logika untuk menutup sidebar di mobile saat tap di area luar
+  const sidebar = $("#sidebar");
+  const mobileMenu = $("#mobileMenu");
+  
+  if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains("open")) {
+    if (!sidebar.contains(e.target) && (!mobileMenu || !mobileMenu.contains(e.target))) {
+      sidebar.classList.remove("open");
+    }
+  }
+
+  // 2. Navigasi Pindah Halaman
   const p = e.target.closest("[data-page]");
   if (p) {
     e.preventDefault();
     page(p.dataset.page);
-    const sidebar = $("#sidebar");
     if (window.innerWidth <= 768 && sidebar) sidebar.classList.remove("open");
     return;
   }

@@ -4799,3 +4799,54 @@ body.dark .toast {
   }
 
 }
+/* =========================================
+   MOBILE RESPONSIVE FIXES
+   ========================================= */
+@media (max-width: 768px) {
+  /* Fix 1: Pindahkan Dark Mode & Profil ke Kanan Atas */
+  .header-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+  }
+  
+  /* Sembunyikan teks search dan nama user biar header nggak sempit */
+  .global-search, 
+  .user-btn span {
+    display: none !important;
+  }
+
+  /* Fix 2: Rapikan Kartu Smart Match biar tombol Contact muncul */
+  .match-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+  }
+  
+  .match-card .btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  /* Posisikan persentase Match di sudut kanan atas kartu */
+  .score-box {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+}
+/* Fix 3: Mencegah bug harus tap dua kali di tombol submit */
+@media (hover: none) {
+  .btn:hover {
+    transform: none;
+    background-color: inherit;
+  }
+  .btn:active {
+    transform: scale(0.98); /* Tetap kasih efek visual saat benar-benar ditekan */
+  }
+} 
