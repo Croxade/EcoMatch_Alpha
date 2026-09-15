@@ -2,13 +2,13 @@ import { $, $$ } from '../utils/helpers.js';
 import { state, meta, matches, learn } from '../models/db.js';
 import { renderMarket, renderMatches } from './marketCtrl.js';
 
-export function sync() {
-  ["sideCoins", "dashCoins", "walletCoins"].forEach((id) => {
-    const x = $("#" + id);
-    if (x) x.textContent = state.coins.toLocaleString("id-ID");
-  });
+export function updateDashboardStats() {
+  // Target Misi Bulanan (Contoh: 50 kg)
+  const target = 50;
+  const percent = Math.min(100, Math.round((state.diverted / target) * 100));
+  const remaining = Math.max(0, target - state.diverted);
 
-  // Sinkronisasi statistik dasbor dari state 0
+  // 1. Update Kartu Statistik Utama
   const statDiv = $("#statDiverted");
   if (statDiv) statDiv.textContent = state.diverted.toFixed(1) + " kg";
 
@@ -17,6 +17,33 @@ export function sync() {
 
   const statCo2 = $("#statCo2");
   if (statCo2) statCo2.textContent = state.co2.toFixed(1) + " kg";
+
+  // 2. Update Widget Monthly Mission
+  const mPercent = $("#missionPercent");
+  if (mPercent) mPercent.textContent = percent + "%";
+
+  const mRemaining = $("#missionRemaining");
+  if (mRemaining) mRemaining.textContent = remaining.toFixed(1) + " kg";
+
+  const mProgressText = $("#missionProgressText");
+  if (mProgressText) mProgressText.textContent = `${state.diverted.toFixed(1)} / ${target} kg`;
+
+  const mBar = $("#missionBar");
+  if (mBar) mBar.style.width = percent + "%";
+
+  const mRing = $("#missionRing");
+  if (mRing) {
+    // Membuat efek lingkaran progress berputar sesuai persentase
+    mRing.style.background = `conic-gradient(var(--green) ${percent * 3.6}deg, var(--border) 0deg)`;
+  }
+}
+
+export function sync() {
+  ["sideCoins", "dashCoins", "walletCoins"].forEach((id) => {
+    const x = $("#" + id);
+    if (x) x.textContent = state.coins.toLocaleString("id-ID");
+  });
+  updateDashboardStats();
 }
 
 export function page(name) {
@@ -77,22 +104,16 @@ export function renderDash() {
 }
 
 export function renderOrders() {
-  const rows = []; // Kosong dari 0
   const ordersRows = $("#ordersRows");
   if (ordersRows) {
-    ordersRows.innerHTML = rows.length === 0 
-      ? `<p class="muted" style="padding:24px;text-align:center">Belum ada transaksi atau pickup.</p>` 
-      : "";
+    ordersRows.innerHTML = `<p class="muted" style="padding:24px;text-align:center">Belum ada transaksi atau pickup.</p>`;
   }
 }
 
 export function renderConversations() {
-  const conversations = []; // Kosong dari 0
   const convList = $("#conversationList");
   if (convList) {
-    convList.innerHTML = conversations.length === 0
-      ? `<p class="muted" style="padding:20px;text-align:center;font-size:13px">Belum ada pesan aktif.</p>`
-      : "";
+    convList.innerHTML = `<p class="muted" style="padding:20px;text-align:center;font-size:13px">Belum ada pesan aktif.</p>`;
   }
 }
 
@@ -131,7 +152,7 @@ export function renderChallenge() {
   `).join("");
 
   const leaders = [
-    ["1", "GS", "GreenSaver (You)", "0 EC"]
+    ["1", "GS", "GreenSaver (You)", state.coins + " EC"]
   ];
 
   $("#leaderboard").innerHTML = leaders.map(x => `

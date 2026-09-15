@@ -1,6 +1,6 @@
 import { $, $$, rupiah, toast } from '../utils/helpers.js';
 import { products, state, matches, IMG } from '../models/db.js';
-import { page } from './uiCtrl.js';
+import { page, updateDashboardStats } from './uiCtrl.js';
 import { addCoins } from '../services/coinLogic.js';
 
 export let selectedCat = "Plastik";
@@ -42,14 +42,14 @@ export function initSellForm() {
     const price = Number($("#sellPrice").value);
     const imageMap = { Plastik: "plastic", Kertas: "cardboard", Kain: "clothes", Logam: "metal", Elektronik: "laptop" };
 
-    // Tambah data produk baru
+    // Masukkan ke array products
     products.unshift({
       id: Date.now(), cat: selectedCat, name,
       img: IMG[imageMap[selectedCat] || "eco"],
       price, weight: kg + " kg", loc: $("#sellLocation").value, seller: "GreenSaver", match: 97, condition: $("#sellCondition").value
     });
 
-    // Generate Smart Match otomatis berdasarkan listing yang di-post
+    // Tambah Smart Match baru
     matches.unshift([
       selectedCat.substring(0, 2).toUpperCase(),
       "EcoPartner Hub",
@@ -60,14 +60,18 @@ export function initSellForm() {
       rupiah(price) + "/kg"
     ]);
 
-    // Update akumulasi state dari 0
+    // AKUMULASI NILAI DARI INPUT USER
     state.diverted += kg;
     state.value += (kg * price);
-    state.co2 += Number((kg * 0.75).toFixed(1)); // Estimasi sederhana CO2 avoided
+    state.co2 += Number((kg * 0.75).toFixed(1)); // Kalkulasi estimasi CO2 avoided
 
     state.history.unshift(["Listing baru · " + name, "+" + rupiah(kg * price), "Just now"]);
+    
+    // Update tampilan dashboard secara instan
+    updateDashboardStats();
+
     addCoins(100, "Listing bonus");
     page("dashboard");
-    toast("Listing live! Smart Match berhasil dibuat.");
+    toast("Listing live! Statistik dashboard dan Monthly Mission berhasil diperbarui.");
   };
 }
