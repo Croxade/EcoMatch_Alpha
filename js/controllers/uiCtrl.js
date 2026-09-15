@@ -1,6 +1,17 @@
 import { $, $$ } from '../utils/helpers.js';
 import { state, meta, matches, learn, conversations, products } from '../models/db.js';
-import { renderMarket, renderMatches } from './marketCtrl.js';
+import { renderMarket, renderMatches, orders } from './marketCtrl.js';
+
+let activeConversationIndex = 0;
+
+export function setActiveConversation(i) {
+  activeConversationIndex = i;
+  renderConversations();
+}
+
+export function getActiveConversation() {
+  return conversations[activeConversationIndex] || conversations[0];
+}
 
 function setGreeting() {
   const hour = new Date().getHours();
@@ -117,16 +128,31 @@ export function renderDash() {
 }
 
 export function renderOrders() {
-  if ($("#ordersRows")) $("#ordersRows").innerHTML = `<p class="muted" style="padding:24px;text-align:center">Belum ada transaksi.</p>`;
+  const el = $("#ordersRows");
+  if (!el) return;
+  if (orders.length === 0) {
+    el.innerHTML = `<p class="muted" style="padding:24px;text-align:center">Belum ada transaksi.</p>`;
+    return;
+  }
+  el.innerHTML = orders.map((o) => `
+    <div class="tr">
+      <span>${o.id}</span>
+      <span>${o.seller}</span>
+      <span>${o.status}</span>
+      <span>Rp ${o.value.toLocaleString("id-ID")}</span>
+      <span>${o.date}</span>
+      <span></span>
+    </div>
+  `).join("");
 }
 
 export function renderConversations() {
   const convList = $("#conversationList");
   const chatHead = $(".chat-head");
   const chatBody = $("#chatBody");
-  
+
   if (!convList) return;
-  
+
   if (conversations.length === 0) {
     convList.innerHTML = `<p class="muted" style="padding:20px;text-align:center;font-size:13px">Belum ada pesan.</p>`;
     if (chatHead) chatHead.innerHTML = `<div>Mulai obrolan dari marketplace.</div>`;
@@ -134,15 +160,26 @@ export function renderConversations() {
     return;
   }
 
+  if (activeConversationIndex >= conversations.length) activeConversationIndex = 0;
+  const active = conversations[activeConversationIndex];
+
+  // Tiap conversation punya thread pesannya sendiri, dibuat sekali kalau belum ada
+  if (!active.messages) {
+    active.messages = [{ from: "other", text: "Halo! Silakan post pertanyaan tentang material." }];
+  }
+
   convList.innerHTML = conversations.map((c, i) => `
-    <div class="conversation ${i === 0 ? "active" : ""}">
+    <div class="conversation ${i === activeConversationIndex ? "active" : ""}" data-conv-index="${i}">
       <div class="company-logo">${c.logo}</div>
       <main><b>${c.seller}</b><small>${c.lastMsg}</small></main><time>${c.time}</time>
     </div>
   `).join("");
 
-  if (chatHead) chatHead.innerHTML = `<div class="avatar">${conversations[0].logo}</div><div><b>${conversations[0].seller}</b><small>● Online</small></div>`;
-  if (chatBody && chatBody.innerHTML.trim() === "") chatBody.innerHTML = `<div class="date">Today</div><div class="bubble other">Halo! Silakan post pertanyaan tentang material.</div>`;
+  if (chatHead) chatHead.innerHTML = `<div class="avatar">${active.logo}</div><div><b>${active.seller}</b><small>● Online</small></div>`;
+  if (chatBody) {
+    chatBody.innerHTML = `<div class="date">Today</div>` + active.messages.map((m) => `<div class="bubble ${m.from === "me" ? "me" : "other"}">${m.text}</div>`).join("");
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
 }
 
 export function renderLearn() {

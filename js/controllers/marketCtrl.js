@@ -1,11 +1,38 @@
 import { products, state, matches, conversations } from '../models/db.js';
 import { $, rupiah, toast } from '../utils/helpers.js';
-import { page, closeModals, renderConversations, updateDashboardStats } from './uiCtrl.js';
+import { page, closeModals, updateDashboardStats, setActiveConversation } from './uiCtrl.js';
+
+// Simpanan/wishlist produk. Disimpan di sini (bukan db.js) karena struktur
+// db.js belum expose field ini. Pakai Set of id biar cepat dicek & unik.
+const savedIds = new Set();
+export function isSaved(id) { return savedIds.has(String(id)); }
+export function toggleSave(id) {
+  id = String(id);
+  const nowSaved = !savedIds.has(id);
+  if (nowSaved) savedIds.add(id); else savedIds.delete(id);
+  return nowSaved;
+}
+
+// Order/riwayat pembelian. Sama seperti savedIds, disimpan lokal di sini.
+export const orders = [];
+export function createOrder(p) {
+  const qty = parseFloat(p.weight) || 1;
+  const order = {
+    id: "ORD-" + Date.now().toString().slice(-6),
+    product: p.name,
+    seller: p.seller,
+    status: "Menunggu konfirmasi",
+    value: p.price * qty,
+    date: "Hari ini"
+  };
+  orders.unshift(order);
+  return order;
+}
 
 export function productCard(p) {
   return `
     <article class="product">
-      <div class="product-photo"><img src="${p.img}" alt="${p.name}" loading="lazy"><button class="heart" data-save="${p.id}">♡</button></div>
+      <div class="product-photo"><img src="${p.img}" alt="${p.name}" loading="lazy"><button class="heart ${isSaved(p.id) ? "active" : ""}" data-save="${p.id}">${isSaved(p.id) ? "♥" : "♡"}</button></div>
       <div class="product-body">
         <span class="badge">${p.cat}</span><h3>${p.name}</h3><p>${p.condition} · ${p.weight}</p>
         <div class="product-price">${rupiah(p.price)}<small>/kg</small></div>
@@ -20,7 +47,7 @@ export function renderMarket() {
   let a = products.filter((p) => {
     const searchString = `${p.name} ${p.cat} ${p.loc} ${p.seller}`.toLowerCase();
     const queryMatch = !state.query || searchString.includes(state.query.toLowerCase());
-    const filterMatch = state.filter === "all" || p.cat === state.filter;
+    const filterMatch = state.filter === "all" || (state.filter === "saved" ? isSaved(p.id) : p.cat === state.filter);
     return queryMatch && filterMatch;
   });
 
@@ -64,29 +91,47 @@ export function openProduct(id) {
 
   $("#detailModal").classList.add("open");
 
+  const saveBtn = $("#saveListing");
+  if (saveBtn) {
+    saveBtn.textContent = isSaved(p.id) ? "♥ Saved" : "♡ Save";
+    saveBtn.onclick = () => {
+      const nowSaved = toggleSave(p.id);
+      saveBtn.textContent = nowSaved ? "♥ Saved" : "♡ Save";
+      renderMarket(); // sinkronin heart icon di grid marketplace
+      toast(nowSaved ? "Listing disimpan. Cek tab ♥ Saved di Marketplace." : "Listing dihapus dari Saved.");
+    };
+  }
+
+  const buyBtn = $("#buyNow");
+  if (buyBtn) {
+    buyBtn.onclick = () => {
+      const order = createOrder(p);
+      closeModals();
+      page("orders");
+      toast(`Pesanan ${order.id} dibuat. Cek status di Pesanan & Pickup.`);
+    };
+  }
+
   $("#contactSeller").onclick = () => {
-    const isExist = conversations.find(c => c.seller === p.seller);
-    if (!isExist) {
+    let idx = conversations.findIndex(c => c.seller === p.seller);
+    if (idx === -1) {
       conversations.unshift({
         logo: p.seller.substring(0, 2).toUpperCase(),
         seller: p.seller,
         lastMsg: `Tanya material: ${p.name}`,
-        time: "Just now"
+        time: "Just now",
+        messages: [
+          { from: "other", text: "Halo! Silakan post pertanyaan tentang material." },
+          { from: "me", text: `Halo kak, untuk material ${p.name} apakah masih tersedia?` }
+        ]
       });
+      idx = 0;
     }
 
     closeModals();
     page("messages");
-    renderConversations();
+    setActiveConversation(idx);
     updateDashboardStats();
-    
-    setTimeout(() => {
-      const chatInput = $("#chatMessage");
-      if (chatInput) chatInput.value = `Halo kak, untuk material ${p.name} apakah masih tersedia?`;
-    }, 100);
-
     toast(`Membuka chat dengan ${p.seller}`);
   };
-
-  $("#saveListing").onclick = () => { toast("Listing disimpan ke Saved."); };
 }

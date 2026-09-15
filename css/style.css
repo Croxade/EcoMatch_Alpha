@@ -1129,6 +1129,11 @@ h2 strong {
   border-radius:50%;
   width:25px;
   height:25px;
+  color:var(--ink);
+}
+
+.product-photo .heart.active {
+  color:var(--danger);
 }
 
 .product-body {
@@ -2643,6 +2648,7 @@ h2 strong {
   font-size:9px;
   box-shadow:var(--shadow);
   opacity:0;
+  pointer-events:none;
   transform:translateY(8px);
   transition:.2s;
   z-index:200;
@@ -4849,4 +4855,4 @@ body.dark .toast {
   .btn:active {
     transform: scale(0.98); /* Tetap kasih efek visual saat benar-benar ditekan */
   }
-} 
+}

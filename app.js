@@ -2,8 +2,8 @@ import { $, $$, toast, rupiah } from './js/utils/helpers.js';
 import { state, learn, conversations } from './js/models/db.js';
 import { initSettings } from './js/models/settingsDB.js';
 import { loadTheme, toggleTheme } from './js/services/themeLogic.js';
-import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, renderConversations, sync, updateDashboardStats, addCoins } from './js/controllers/uiCtrl.js';
-import { renderMarket, openProduct } from './js/controllers/marketCtrl.js';
+import { page, render, closeModals, renderLearn, renderChallenge, renderOrders, renderConversations, sync, updateDashboardStats, addCoins, setActiveConversation, getActiveConversation } from './js/controllers/uiCtrl.js';
+import { renderMarket, openProduct, toggleSave } from './js/controllers/marketCtrl.js';
 import { initSellForm, estimate } from './js/controllers/sellCtrl.js';
 
 const safeListen = (id, event, callback) => {
@@ -31,6 +31,9 @@ document.addEventListener("click", (e) => {
     return;
   }
 
+  const convItem = e.target.closest("[data-conv-index]");
+  if (convItem) { setActiveConversation(Number(convItem.dataset.convIndex)); return; }
+
   const prod = e.target.closest("[data-product]");
   if (prod) { openProduct(prod.dataset.product); return; }
 
@@ -45,7 +48,13 @@ document.addEventListener("click", (e) => {
   }
 
   const save = e.target.closest("[data-save]");
-  if (save) { save.textContent = "♥"; toast("Listing disimpan."); return; }
+  if (save) {
+    const nowSaved = toggleSave(save.dataset.save);
+    save.textContent = nowSaved ? "♥" : "♡";
+    save.classList.toggle("active", nowSaved);
+    toast(nowSaved ? "Listing disimpan. Cek tab ♥ Saved di Marketplace." : "Listing dihapus dari Saved.");
+    return;
+  }
 
   const learnBtn = e.target.closest("[data-learn]");
   if (learnBtn) {
@@ -59,17 +68,18 @@ document.addEventListener("click", (e) => {
   const contact = e.target.closest("[data-contact]");
   if (contact) {
     const buyerName = contact.dataset.contact;
-    const isExist = conversations.find(c => c.seller === buyerName);
-    if (!isExist) {
+    let idx = conversations.findIndex(c => c.seller === buyerName);
+    if (idx === -1) {
       conversations.unshift({
         logo: buyerName.substring(0, 2).toUpperCase(),
         seller: buyerName,
         lastMsg: `Menghubungi buyer dari Smart Match`,
         time: "Just now"
       });
+      idx = 0;
     }
     page("messages");
-    renderConversations();
+    setActiveConversation(idx);
     updateDashboardStats();
     toast(`Membuka chat dengan ${buyerName}`);
     return;
@@ -124,18 +134,20 @@ safeListen("#chatForm", "submit", (e) => {
   const msgEl = $("#chatMessage");
   const v = msgEl ? msgEl.value.trim() : "";
   if (!v) return;
-  const body = $("#chatBody");
-  if (body) {
-    body.insertAdjacentHTML("beforeend", `<div class="bubble me">${v}</div>`);
-    body.scrollTop = body.scrollHeight;
-  }
+
+  const active = getActiveConversation();
+  if (!active) return;
+  if (!active.messages) active.messages = [];
+  active.messages.push({ from: "me", text: v });
+  active.lastMsg = v;
+  active.time = "Just now";
   if (msgEl) msgEl.value = "";
+  renderConversations();
 
   setTimeout(() => {
-    if (body) {
-      body.insertAdjacentHTML("beforeend", `<div class="bubble other">Baik, aku cek ketersediaan tim logistik kami dulu ya.</div>`);
-      body.scrollTop = body.scrollHeight;
-    }
+    active.messages.push({ from: "other", text: "Baik, aku cek ketersediaan tim logistik kami dulu ya." });
+    active.lastMsg = "Baik, aku cek ketersediaan tim logistik kami dulu ya.";
+    renderConversations();
   }, 700);
 });
 
