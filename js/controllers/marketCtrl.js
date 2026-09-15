@@ -1,6 +1,6 @@
 import { products, state, matches, conversations } from '../models/db.js';
 import { $, rupiah, toast } from '../utils/helpers.js';
-import { page, closeModals, renderConversations } from './uiCtrl.js';
+import { page, closeModals, renderConversations, updateDashboardStats } from './uiCtrl.js';
 
 export function productCard(p) {
   return `
@@ -29,14 +29,23 @@ export function renderMarket() {
   if (state.sort === "new") a.sort((x, y) => y.id - x.id);
 
   if ($("#resultCount")) $("#resultCount").textContent = a.length;
-  if ($("#kpiListings")) $("#kpiListings").textContent = products.length;
   if ($("#marketGrid")) $("#marketGrid").innerHTML = a.map(productCard).join("");
+  updateDashboardStats(); // Pastikan badge marketplace sinkron
 }
 
 export function renderMatches() {
   if ($("#matchList")) {
     $("#matchList").innerHTML = matches.map((m) => `
-      <article class="match-card"><div class="company-logo">${m[0]}</div><main><h3>${m[1]}</h3><p>Looking for <b>${m[2]}</b></p></main></article>
+      <article class="match-card">
+        <div class="company-logo">${m[0]}</div>
+        <main>
+          <h3>${m[1]}</h3>
+          <p>Mencari: <b>${m[2]}</b> · Volume ${m[3]}</p>
+          <div class="tags"><span>⌖ ${m[4]}</span><span>Verified buyer</span></div>
+        </main>
+        <div class="score-box"><strong>${m[5]}</strong><small>Match</small><small>${m[6]}</small></div>
+        <button class="btn primary" data-contact="${m[1]}">Contact</button>
+      </article>
     `).join("");
   }
 }
@@ -69,6 +78,7 @@ export function openProduct(id) {
     closeModals();
     page("messages");
     renderConversations();
+    updateDashboardStats();
     
     setTimeout(() => {
       const chatInput = $("#chatMessage");

@@ -1,7 +1,6 @@
 import { $, $$, rupiah, toast } from '../utils/helpers.js';
 import { products, state, matches, IMG } from '../models/db.js';
-import { page, updateDashboardStats } from './uiCtrl.js';
-import { addCoins } from '../services/coinLogic.js';
+import { page, updateDashboardStats, addCoins } from './uiCtrl.js';
 
 export let selectedCat = "Plastik";
 
@@ -53,16 +52,25 @@ export function initSellForm() {
       products.unshift({
         id: Date.now(), cat: selectedCat, name,
         img: IMG[imageMap[selectedCat] || "eco"],
-        price, weight: kg + " kg", loc: $("#sellLocation").value, seller: "GreenSaver", match: 97, condition: $("#sellCondition").value
+        price, weight: kg + " kg", loc: $("#sellLocation").value, seller: "GreenSaver (You)", match: 99, condition: $("#sellCondition").value
       });
 
+      // SMART MATCH LOGIC: Menambahkan Buyer yang Relevan & Sinkron!
       matches.unshift([
-        selectedCat.substring(0, 2).toUpperCase(), "EcoPartner Hub", name, `${kg} kg`, `${$("#sellLocation").value} · Pickup`, "97%", rupiah(price) + "/kg"
+        selectedCat.substring(0, 2).toUpperCase(), 
+        "EcoPartner Hub", 
+        name, // Nama barang yang sama
+        `${kg}–${kg+50} kg`, // Mencari volume serupa
+        `${$("#sellLocation").value} · Pickup`,
+        "98%", 
+        rupiah(price + 250) + "/kg" // Berani bayar lebih mahal sedikit
       ]);
 
       state.diverted += kg;
       state.value += (kg * price);
       state.co2 += Number((kg * 0.75).toFixed(1));
+      state.water += Number((kg * 42.5).toFixed(0)); // Water saved logic (asumsi 42.5L/kg)
+      
       state.history.unshift(["Listing baru · " + name, "+" + rupiah(kg * price), "Just now"]);
 
       updateDashboardStats();
@@ -71,8 +79,8 @@ export function initSellForm() {
       form.reset();
       estimate();
       
-      page("dashboard");
-      toast("Listing berhasil! Dashboard sudah diperbarui.");
+      page("matches"); // Langsung arahin ke halaman match biar dia liat hasilnya
+      toast("Listing berhasil! Ada buyer baru untuk material kamu.");
     };
   }
 }

@@ -10,11 +10,15 @@ export const IMG = {
 };
 
 export let products = [
-  { id: 1, cat: "Plastik", name: "Botol PET Bening", img: IMG.plastic, price: 2750, weight: "10 kg", loc: "Jakarta Selatan", seller: "GreenSaver", match: 92, condition: "Clean & sorted" },
-  { id: 2, cat: "Kertas", name: "Kardus Corrugated", img: IMG.cardboard, price: 1800, weight: "35 kg", loc: "Jakarta Selatan", seller: "Dina Home", match: 88, condition: "Dry & sorted" }
+  { id: 1, cat: "Plastik", name: "Botol PET Bening", img: IMG.plastic, price: 2750, weight: "10 kg", loc: "Jakarta Selatan", seller: "Budi Santoso", match: 92, condition: "Clean & sorted" },
+  { id: 2, cat: "Kertas", name: "Kardus Corrugated", img: IMG.cardboard, price: 1800, weight: "35 kg", loc: "Depok", seller: "Dina Home", match: 88, condition: "Dry & sorted" }
 ];
 
-export let matches = [];
+export let matches = [
+  ["ER", "EcoRecycle Indonesia", "PET Bening", "50–100 kg", "Jakarta · Pickup", "92%", "Rp 2.750/kg"],
+  ["PL", "PaperLoop", "Kardus Corrugated", "30–80 kg", "Jakarta · Drop-off", "88%", "Rp 1.800/kg"]
+];
+
 export let conversations = [];
 
 export let learn = [
@@ -26,19 +30,22 @@ export let learn = [
 
 export let state = {
   coins: 0,
+  earnedCoins: 0,
+  redeemedCoins: 0,
   diverted: 0,
   value: 0,
   co2: 0,
+  water: 0,
   filter: "all",
   query: "",
-  sort: "match",
+  sort: "new",
   history: []
 };
 
 export const meta = {
   dashboard: ["EcoMatch / Overview", "Good afternoon, GreenSaver.", "Mulai kelola dan ubah waste kamu jadi value hari ini."],
   market: ["EcoMatch / Marketplace", "Find value in what you already have.", "Temukan material, buyer, dan supplier di sekitar ekosistemmu."],
-  matches: ["EcoMatch / Smart Match", "We found your next opportunity.", "Match berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer."],
+  matches: ["EcoMatch / Smart Match", "We found your next opportunity.", "Match dibuat berdasarkan material, volume, lokasi, harga, dan kebutuhan buyer."],
   sell: ["EcoMatch / Sell", "Turn waste into value.", "Post dalam kurang dari 2 menit. EcoMatch akan mencarikan buyer yang relevan."],
   orders: ["EcoMatch / Transactions", "Orders & Pickup", "Kelola proses dari deal sampai material diterima buyer."],
   messages: ["EcoMatch / Messages", "Talk to your circular network.", "Negosiasi, konfirmasi pickup, dan koordinasi dengan buyer."],

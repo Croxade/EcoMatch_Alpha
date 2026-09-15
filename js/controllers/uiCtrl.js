@@ -1,5 +1,5 @@
 import { $, $$ } from '../utils/helpers.js';
-import { state, meta, matches, learn, conversations } from '../models/db.js';
+import { state, meta, matches, learn, conversations, products } from '../models/db.js';
 import { renderMarket, renderMatches } from './marketCtrl.js';
 
 function setGreeting() {
@@ -14,20 +14,53 @@ function setGreeting() {
   }
 }
 
+// Fungsi ini yang update SEMUA angka di layar biar sinkron
 export function updateDashboardStats() {
   const target = 50;
   const percent = Math.min(100, Math.round((state.diverted / target) * 100));
   const remaining = Math.max(0, target - state.diverted);
 
+  // Hero Section (Buletan)
+  if ($("#heroValue")) $("#heroValue").textContent = "+ Rp " + state.value.toLocaleString("id-ID");
+  if ($("#heroDiverted")) $("#heroDiverted").textContent = state.diverted.toFixed(1) + " kg";
+
+  // Kartu Dashboard
   if ($("#statDiverted")) $("#statDiverted").textContent = state.diverted.toFixed(1) + " kg";
   if ($("#statValue")) $("#statValue").textContent = "Rp " + state.value.toLocaleString("id-ID");
   if ($("#statCo2")) $("#statCo2").textContent = state.co2.toFixed(1) + " kg";
 
+  // Monthly Mission Target
   if ($("#missionPercent")) $("#missionPercent").textContent = percent + "%";
   if ($("#missionRemaining")) $("#missionRemaining").textContent = remaining.toFixed(1) + " kg";
   if ($("#missionProgressText")) $("#missionProgressText").textContent = `${state.diverted.toFixed(1)} / ${target} kg`;
   if ($("#missionBar")) $("#missionBar").style.width = percent + "%";
   if ($("#missionRing")) $("#missionRing").style.background = `conic-gradient(var(--green) ${percent * 3.6}deg, var(--border) 0deg)`;
+
+  // Impact Report
+  if ($("#impactDiverted")) $("#impactDiverted").textContent = state.diverted.toFixed(1) + " kg";
+  if ($("#impactCo2")) $("#impactCo2").textContent = state.co2.toFixed(1) + " kg";
+  if ($("#impactWater")) $("#impactWater").textContent = state.water.toLocaleString("id-ID") + " L";
+  if ($("#impactValue")) $("#impactValue").textContent = "Rp " + state.value.toLocaleString("id-ID");
+
+  // Wallet Earned & Redeemed
+  if ($("#walletEarned")) $("#walletEarned").textContent = state.earnedCoins.toLocaleString("id-ID");
+  if ($("#walletRedeemed")) $("#walletRedeemed").textContent = state.redeemedCoins.toLocaleString("id-ID");
+
+  // Marketplace Badges
+  if ($("#navMarketBadge")) $("#navMarketBadge").textContent = products.length;
+  if ($("#kpiListings")) $("#kpiListings").textContent = products.length;
+  
+  // Message Badges
+  if ($("#msgBadge")) $("#msgBadge").textContent = conversations.length > 0 ? conversations.length : "0";
+}
+
+// Fungsi Nambah Koin (Biar earnedCoins ikutan nambah)
+export function addCoins(n, label) {
+  state.coins += n;
+  state.earnedCoins += n;
+  state.history.unshift([label, "+" + n + " EC", "Just now"]);
+  sync();
+  if ($("#walletActivity")) renderWallet();
 }
 
 export function sync() {
@@ -50,7 +83,6 @@ export function page(name) {
   }
   
   if (name === "dashboard") setGreeting();
-  
   window.scrollTo({ top: 0, behavior: "smooth" });
   render(name);
 }
@@ -73,7 +105,7 @@ export function renderDash() {
   const matchContainer = $("#dashMatches");
   if (matchContainer) {
     matchContainer.innerHTML = matches.length === 0 
-      ? `<p class="muted" style="padding:16px;font-size:13px">Belum ada Smart Match. Yuk, post waste kamu!</p>` 
+      ? `<p class="muted" style="padding:16px;font-size:13px">Belum ada Smart Match.</p>` 
       : matches.slice(0, 3).map(m => `<div class="match-row"><div class="company-logo">${m[0]}</div><main><b>${m[1]}</b><small>Needs ${m[2]}</small></main></div>`).join("");
   }
   const actContainer = $("#dashActivity");
@@ -109,13 +141,8 @@ export function renderConversations() {
     </div>
   `).join("");
 
-  if (chatHead) {
-    chatHead.innerHTML = `<div class="avatar">${conversations[0].logo}</div><div><b>${conversations[0].seller}</b><small>● Online</small></div>`;
-  }
-  
-  if (chatBody && chatBody.innerHTML.trim() === "") {
-    chatBody.innerHTML = `<div class="date">Today</div><div class="bubble other">Halo! Silakan post pertanyaan tentang material.</div>`;
-  }
+  if (chatHead) chatHead.innerHTML = `<div class="avatar">${conversations[0].logo}</div><div><b>${conversations[0].seller}</b><small>● Online</small></div>`;
+  if (chatBody && chatBody.innerHTML.trim() === "") chatBody.innerHTML = `<div class="date">Today</div><div class="bubble other">Halo! Silakan post pertanyaan tentang material.</div>`;
 }
 
 export function renderLearn() {
