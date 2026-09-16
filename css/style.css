@@ -447,10 +447,64 @@ h2 strong {
   width:220px;
   height:220px;
   border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#c9e4bd,#80a58d 65%,#406c5b);
   right:30px;
   top:15px;
-  opacity:.7;
+  overflow:hidden;
+  isolation:isolate;
+  background:#061a2b;
+  /* glow atmosfer biru tipis di sekeliling bola */
+  box-shadow:
+    0 0 0 1px rgba(150,200,255,.25),
+    0 0 22px 4px rgba(110,170,235,.35),
+    0 14px 34px rgba(20,45,70,.3);
+}
+
+/* Tekstur bumi (NASA Blue Marble). Lebar 200% = satu peta penuh 360deg,
+   yang kelihatan cuma separuhnya, persis seperti bola asli. */
+.globe-earth,
+.globe-clouds {
+  position:absolute;
+  inset:0;
+  background-repeat:repeat-x;
+  background-size:200% 100%;
+  border-radius:50%;
+}
+
+.globe-earth {
+  background-image:url("../img/earth.jpg");
+  animation:globeSpin 50s linear infinite;
+}
+
+/* Awan diputar sedikit lebih cepat biar gerakannya terasa hidup */
+.globe-clouds {
+  background-image:url("../img/clouds.png");
+  opacity:.5;
+  mix-blend-mode:screen;
+  animation:globeSpin 38s linear infinite;
+}
+
+@keyframes globeSpin {
+  from { background-position:0 0; }
+  to   { background-position:-200% 0; }
+}
+
+/* Efek bola: kilau matahari kiri-atas, sisi malam kanan-bawah */
+.globe-shade {
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255,255,255,.35) 0 8%, rgba(255,255,255,.08) 26%, transparent 50%),
+    radial-gradient(circle at 72% 76%, rgba(2,10,22,.75) 0 34%, transparent 68%);
+  box-shadow:
+    inset -20px -16px 46px rgba(2,10,22,.75),
+    inset 12px 10px 28px rgba(190,225,255,.22);
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .globe-earth,
+  .globe-clouds { animation:none; }
 }
 
 .orbit {
